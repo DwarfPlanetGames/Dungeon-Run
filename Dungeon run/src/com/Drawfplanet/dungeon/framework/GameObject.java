@@ -1,13 +1,13 @@
 package com.Drawfplanet.dungeon.framework;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.LinkedList;
 
 public abstract class GameObject {
 
-	public float x;
-	protected float y;
+	public float x, y;
 	public float xo, yo;
 	protected ObjectId id;
 	protected float velX = 0, velY =0;
@@ -15,12 +15,8 @@ public abstract class GameObject {
 	protected boolean jumping = false;
 	protected boolean falling_block = false;
 	protected boolean reset = false;
+	public float width, height;
 	
-	
-	
-	
-	
-
 	public GameObject(float x, float y, ObjectId id){
 		this.x = x;
 		this.y = y;
@@ -33,6 +29,11 @@ public abstract class GameObject {
 	public abstract void tick(LinkedList<GameObject> object);
 	public abstract void render(Graphics g);
 	public abstract Rectangle getBounds();
+	
+	public void quickRender(Graphics g) {
+		g.setColor(Color.WHITE);
+		g.drawRect((int) x, (int) y, 32, 32);
+	}
 	
 	public float getX(){
 		return x;
