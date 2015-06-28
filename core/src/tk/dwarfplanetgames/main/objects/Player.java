@@ -1,0 +1,175 @@
+package tk.dwarfplanetgames.main.objects;
+
+import java.awt.Graphics;
+import java.util.LinkedList;
+
+import tk.dwarfplanetgames.main.GameObject;
+import tk.dwarfplanetgames.main.Handler;
+import tk.dwarfplanetgames.main.MainGame;
+import tk.dwarfplanetgames.main.ObjectId;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
+
+public class Player extends GameObject {
+
+	private float width = 48, height = 96;
+
+	private float gravity = 4f;
+	private final float MAX_SPEED = 10;
+	public static Boolean dead = false;
+	
+	private Handler handler;
+	
+	public static final TextureRegion tex = new TextureRegion(new Texture("Texture_Spritesheet.png"),32*4,0,48,96);
+	
+
+	public Player(float x, float y, Handler handler) {
+		super(x, y, ObjectId.Player);
+		this.handler = handler;
+		tex.flip(false,true);
+	}
+
+	public void tick(LinkedList<GameObject> object) {
+		if (velX < 32f)
+			velX += 2f;
+		else if (velX < 64f)
+			velX += 0.5f;
+		x += velX;
+		y += velY;
+		
+		if (Gdx.input.isTouched() && !jumping) {
+			jumping=true;
+			velY -= 46;
+		}
+
+		if (falling || jumping) {
+			velY += gravity;
+		
+
+			/*if (velY > MAX_SPEED) {
+				velY = MAX_SPEED;
+			}*/
+		}
+		
+		
+
+		Collision(object);
+		MainGame.playerX = (int) x - 128;
+		MainGame.playerY = (int) (y + height / 2f);
+	}
+
+	private void Collision(LinkedList<GameObject> object) {
+		for (int i = 0; i < handler.object.size(); i++) {
+			GameObject tempObject = handler.object.get(i);
+
+			if (tempObject.getId() == ObjectId.Block ) {
+				// Right collision
+				if (getBoundsRight().overlaps(tempObject.getBounds())) {
+
+					x = tempObject.x - width;
+					velX = 0;
+					
+				}
+				// top collision
+				if (getBoundsTop().overlaps(tempObject.getBounds())) {
+					y = tempObject.y + 32;
+					velY = 0;
+
+				}
+				// bottom collision
+				if (getBounds().overlaps(tempObject.getBounds())) {
+					y = tempObject.y - height;
+					velY = 0;
+
+					falling = false;
+					jumping = false;					
+				} else {
+					falling = true;
+					
+					//intended to fix the jumping after falling from a platform glitch
+					//jumping = true;
+				}
+					
+				// left collision
+				if (getBoundsLeft().overlaps(tempObject.getBounds())) {
+
+					x = tempObject.x + 32;
+					velX = 0;
+					System.out.println("Woah!!! Something happened that shouldn't have!");
+					
+				}
+			}
+			//resets the player position back to start if player touches lava
+			if (tempObject.getId() == ObjectId.Lava) {
+				if(getBounds().overlaps(tempObject.getBounds())){
+					//handler.removeObject(this);
+					x = xo;
+					y = yo;	
+					velX = 0;
+					velY = 0;
+				}
+			
+				
+			}
+			//ends the game if player touches the end block
+			if(tempObject.getId() == ObjectId.End){
+				if(getBounds().overlaps(tempObject.getBounds())){
+					System.exit(0);
+					
+				}
+			}
+			//triggers the falling blocks to fall
+			if(tempObject.getId() == ObjectId.FallingBlocks){
+				if(getBounds().overlaps(tempObject.getBounds())){
+					velY = 0;
+					jumping = false;
+					((FallingBlocks) tempObject).setFallingBlock(true);	
+				}
+				//side won't go through falling block
+				if(getBoundsRight().overlaps(tempObject.getBounds())){
+					x = tempObject.x - width;
+				}
+				
+			}
+		}
+	}
+
+	public void render(Graphics g) {
+		/*g.setColor(Color.blue);
+		g.drawRect((int) x, (int) y, (int) width, (int) height);
+		
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.setColor(Color.red);
+		*/ 
+		
+	}
+
+	public Rectangle getBounds() {
+		return new Rectangle((int) ((int) x + (width / 2) - ((width / 2) / 2)),
+				(int) ((int) y + (height / 2)), (int) width / 2,
+				(int) height / 2 + velY);
+	}
+
+	public Rectangle getBoundsRight() {
+		return new Rectangle((int) ((int) x + width - 5 - velX), (int) y + 10, (int) 5 + velX, (int) height - 20);
+	}
+
+	public Rectangle getBoundsLeft() {
+		return new Rectangle((int) x + velX, (int) y + 10, (int) 5 - velX, (int) height - 20);
+	}
+
+	public Rectangle getBoundsTop() {
+		return new Rectangle((int) ((int) x + (width / 2) - ((width / 2) / 2)),
+				(int) y + velY, (int) width / 2, (int) height / 2 - velY);
+	}
+
+	@Override
+	public void render(SpriteBatch b) {
+		b.draw(tex,x,y);
+		
+	}
+}
