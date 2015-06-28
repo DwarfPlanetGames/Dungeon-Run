@@ -23,7 +23,7 @@ public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = -412412589753911557L;
 	
 	public static boolean restart;
-	//did this work?
+	
 	private boolean running;
 	private Thread thread;
 	
