@@ -65,8 +65,8 @@ public class MainGame extends ApplicationAdapter {
 			time++;
 			if (time > 60*secToBegin) {
 				update();
+				camera.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 				camera.position.set(playerX + camera.viewportWidth / 2f, playerY,0);
-				camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 				camera.update();
 			}
 		}
