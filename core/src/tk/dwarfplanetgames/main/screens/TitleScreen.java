@@ -5,25 +5,26 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class TitleScreen extends InputAdapter implements Screen {
 	private SpriteBatch batch;
 	long oldTime, newTime;
 	public static int time = 0;
 	Texture img = new Texture("DPGamesLogo1.png");
+	TextureRegion titleTex = new TextureRegion(new Texture("title.png"),0,0,526,121);
+	TextureRegion block = new TextureRegion(new Texture("Texture_Spritesheet.png"),0,0,32,32);
+	Texture menu = new Texture("TitleButtons.png");
 	public static OrthographicCamera camera;
-	Pixmap map;
-	Texture menu;
+	
 	
 	@Override
 	public void show() {
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		map = new Pixmap(300,400,Pixmap.Format.RGBA4444);
-		menu = new Texture(map);
+		
 		oldTime = System.nanoTime();
 		batch = new SpriteBatch();
 	}
@@ -35,7 +36,7 @@ public class TitleScreen extends InputAdapter implements Screen {
 		if (time < 60*secToBegin)
 			Gdx.gl.glClearColor(1, 1, 1, 1);
 		else
-			Gdx.gl.glClearColor(0, 0, 0, 0);
+			Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 0);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		if (time < 60*secToBegin) {
@@ -59,8 +60,13 @@ public class TitleScreen extends InputAdapter implements Screen {
 	}
 	
 	public void renderMenu() {
-		batch.draw(menu, Gdx.graphics.getWidth() / 2f - menu.getWidth() / 2f, Gdx.graphics.getHeight() / 2f - menu.getHeight() / 2f);
-		
+		for (int x = -1; x < Gdx.graphics.getWidth() / 64 + 2; x++) {
+			for (int y = -1; y < Gdx.graphics.getHeight() / 64 + 2; y++) {
+				batch.draw(block,x*64, y*64,64,64);
+			}
+		}
+		batch.draw(titleTex, Gdx.graphics.getWidth() / 2f - titleTex.getRegionWidth() / 2f, Gdx.graphics.getHeight() / 2f + menu.getHeight() / 2f, titleTex.getRegionWidth() / 2f, titleTex.getRegionHeight() / 2f, titleTex.getRegionWidth(), titleTex.getRegionHeight(), (float)Math.sin(time / 120f) / 10f + 1.5f, 1.5f, (float)Math.cos(time / 140f) * 5f);
+		batch.draw(menu, Gdx.graphics.getWidth() / 2f - menu.getWidth() / 2f, Gdx.graphics.getHeight() / 2f - menu.getHeight() / 2f - titleTex.getRegionHeight() / 2f);
 	}
 	
 	@Override
