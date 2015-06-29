@@ -20,7 +20,7 @@ public class TitleScreen extends InputAdapter implements Screen {
 	TextureRegion block = new TextureRegion(new Texture("Texture_Spritesheet.png"), 0, 0, 32, 32);
 	Texture menu = new Texture("TitleButtons.png");
 	public static OrthographicCamera camera;
-	public static Music music;
+	public Music music;
 
 	@Override
 	public void show() {
@@ -88,6 +88,7 @@ public class TitleScreen extends InputAdapter implements Screen {
 			}
 			if (screenX > Gdx.graphics.getWidth() / 2f - menu.getWidth() / 2f && screenX < Gdx.graphics.getWidth() / 2f - menu.getWidth() / 2f + menu.getWidth()) {
 				if (screenY > menuY + 100 * 3) {
+					music.stop();
 					((Game) Gdx.app.getApplicationListener()).setScreen(new PlayScreen());
 					System.out.println("STARTED PlayScreen");
 				}
@@ -139,6 +140,8 @@ public class TitleScreen extends InputAdapter implements Screen {
 		batch.dispose();
 		menu.dispose();
 		img.dispose();
+		
+		music.dispose();
 	}
 
 }
