@@ -3,6 +3,7 @@ package tk.dwarfplanetgames.main.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -18,6 +19,7 @@ public class TitleScreen extends InputAdapter implements Screen {
 	TextureRegion block = new TextureRegion(new Texture("Texture_Spritesheet.png"),0,0,32,32);
 	Texture menu = new Texture("TitleButtons.png");
 	public static OrthographicCamera camera;
+	public static Music music;
 	
 	
 	@Override
@@ -27,6 +29,10 @@ public class TitleScreen extends InputAdapter implements Screen {
 		
 		oldTime = System.nanoTime();
 		batch = new SpriteBatch();
+		
+		music = Gdx.audio.newMusic(Gdx.files.internal("title_music.wav"));
+		music.setLooping(true);
+		music.play();
 	}
 	
 	@Override
