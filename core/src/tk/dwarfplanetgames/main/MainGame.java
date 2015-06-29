@@ -5,8 +5,9 @@ import tk.dwarfplanetgames.main.objects.End;
 import tk.dwarfplanetgames.main.objects.FallingBlocks;
 import tk.dwarfplanetgames.main.objects.Lava;
 import tk.dwarfplanetgames.main.objects.Player;
+import tk.dwarfplanetgames.main.screens.TitleScreen;
 
-import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -16,7 +17,7 @@ import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class MainGame extends ApplicationAdapter {
+public class MainGame extends Game {
 	SpriteBatch batch;
 	public static OrthographicCamera camera;
 	TextureRegion img;
@@ -29,7 +30,8 @@ public class MainGame extends ApplicationAdapter {
 	
 	@Override
 	public void create () {
-		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		setScreen(new TitleScreen());
+		/*camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		camera.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		Texture tex = new Texture("DPGamesLogo1.png");
 		img = new TextureRegion(tex, tex.getWidth(), tex.getHeight());
@@ -43,12 +45,13 @@ public class MainGame extends ApplicationAdapter {
 		loadImageLevel(level);
 		camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f,0);
 		camera.update();
-		batch = new SpriteBatch();
+		batch = new SpriteBatch();*/
 	}
 
 	@Override
 	public void render () {
-		int secToBegin = 2;
+		super.render();
+		/*int secToBegin = 2;
 		batch.setProjectionMatrix(camera.combined);
 		if (time < 60*secToBegin)
 			Gdx.gl.glClearColor(1, 1, 1, 1);
@@ -72,7 +75,7 @@ public class MainGame extends ApplicationAdapter {
 		}
 		if (time > 60*secToBegin)
 			h.render(batch);
-		batch.end();
+		batch.end();*/
 	}
 	
 	public void update() {
