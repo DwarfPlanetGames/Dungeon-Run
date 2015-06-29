@@ -18,7 +18,7 @@ public class Player extends GameObject {
 
 	private float width = 48, height = 96;
 
-	private float gravity = 4f;
+	private float gravity = 0.98f;
 	private final float MAX_SPEED = 10;
 	public static Boolean dead = false;
 	
@@ -34,16 +34,16 @@ public class Player extends GameObject {
 	}
 
 	public void tick(LinkedList<GameObject> object) {
-		if (velX < 32f)
-			velX += 2f;
-		else if (velX < 64f)
+		if (velX < 16f)
+			velX += 0.25f;
+		else if (velX < 18f)
 			velX += 0.5f;
 		x += velX;
 		y += velY;
 		
 		if (Gdx.input.isTouched() && !jumping) {
 			jumping=true;
-			velY -= 46;
+			velY -= 20;
 		}
 
 		if (falling || jumping) {
