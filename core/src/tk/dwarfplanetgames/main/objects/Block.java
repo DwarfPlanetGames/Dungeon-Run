@@ -15,7 +15,7 @@ public class Block extends GameObject{
 	
 	int falling = 0;
 	
-	public static final TextureRegion tex = new TextureRegion(new Texture("Texture_Spritesheet.png"),0,0,32,33);
+	public static final TextureRegion tex = new TextureRegion(new Texture("Texture_Spritesheet.png"),0,0,32,32);
 	
 	private int type;
 	public Block(float x, float y,int type) {
