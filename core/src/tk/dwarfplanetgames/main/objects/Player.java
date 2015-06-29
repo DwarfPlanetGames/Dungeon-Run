@@ -5,8 +5,8 @@ import java.util.LinkedList;
 
 import tk.dwarfplanetgames.main.GameObject;
 import tk.dwarfplanetgames.main.Handler;
-import tk.dwarfplanetgames.main.MainGame;
 import tk.dwarfplanetgames.main.ObjectId;
+import tk.dwarfplanetgames.main.screens.PlayScreen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -58,8 +58,8 @@ public class Player extends GameObject {
 		
 
 		Collision(object);
-		MainGame.playerX = (int) x - 128;
-		MainGame.playerY = (int) (y + height / 2f);
+		PlayScreen.playerX = (int) x - 128;
+		PlayScreen.playerY = (int) (y + height / 2f);
 	}
 
 	private void Collision(LinkedList<GameObject> object) {

@@ -2,6 +2,8 @@ package tk.dwarfplanetgames.main;
 
 import java.util.LinkedList;
 
+import tk.dwarfplanetgames.main.screens.PlayScreen;
+
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Handler {
@@ -16,10 +18,10 @@ public class Handler {
 	float camHeight = 0;
 
 	public void tick() {
-		camX = MainGame.camera.position.x - MainGame.camera.viewportWidth / 2f;
-		camY = MainGame.camera.position.y - MainGame.camera.viewportHeight / 2f;
-		camWidth = MainGame.camera.viewportWidth;
-		camHeight = MainGame.camera.viewportHeight;
+		camX = PlayScreen.camera.position.x - PlayScreen.camera.viewportWidth / 2f;
+		camY = PlayScreen.camera.position.y - PlayScreen.camera.viewportHeight / 2f;
+		camWidth = PlayScreen.camera.viewportWidth;
+		camHeight = PlayScreen.camera.viewportHeight;
 		for (int i = 0; i < object.size(); i++) {
 			tempObject = object.get(i);
 			if ((
