@@ -67,7 +67,7 @@ public class PlayScreen implements Screen {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		newTime = System.nanoTime();
-		if (newTime - oldTime > 1000000000 / 60.0) {
+		if (newTime - oldTime > 1000000000 / 30.0) {
 			oldTime = newTime;
 			time++;
 			if (time > 60*secToBegin) {
