@@ -52,7 +52,7 @@ public class PlayScreen implements Screen {
 	
 	public static void levelUp() {
 		levelId++;
-		Texture levelt = new Texture("Level-" + levelId + ".png");
+		Texture levelt = new Texture("levels/" + levelId + ".png");
 		TextureData leveltd = levelt.getTextureData();
 		leveltd.prepare();
 		Pixmap level = leveltd.consumePixmap();

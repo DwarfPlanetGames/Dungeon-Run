@@ -31,7 +31,7 @@ public class TitleScreen extends InputAdapter implements Screen {
 		oldTime = System.nanoTime();
 		batch = new SpriteBatch();
 
-		music = Gdx.audio.newMusic(Gdx.files.internal("title_music.wav"));
+		music = Gdx.audio.newMusic(Gdx.files.internal("music/0.mp3"));
 		music.setLooping(true);
 		music.play();
 	}
