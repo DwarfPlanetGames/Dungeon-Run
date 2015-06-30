@@ -8,16 +8,16 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Handler {
 
-	public LinkedList<GameObject> object = new LinkedList<GameObject>();
+	public static LinkedList<GameObject> object = new LinkedList<GameObject>();
 
-	private GameObject tempObject;
+	private static GameObject tempObject;
 	
-	float camX = 0;
-	float camY = 0;
-	float camWidth = 0;
-	float camHeight = 0;
+	public static float camX = 0;
+	public static float camY = 0;
+	public static float camWidth = 0;
+	public static float camHeight = 0;
 
-	public void tick() {
+	public static void tick() {
 		camX = PlayScreen.camera.position.x - PlayScreen.camera.viewportWidth / 2f;
 		camY = PlayScreen.camera.position.y - PlayScreen.camera.viewportHeight / 2f;
 		camWidth = PlayScreen.camera.viewportWidth;
@@ -37,7 +37,7 @@ public class Handler {
 		}
 	}
 
-	public void render(SpriteBatch b) {
+	public static void render(SpriteBatch b) {
 		for (int i = 0; i < object.size(); i++) {
 			tempObject = object.get(i);
 			if (
@@ -51,12 +51,12 @@ public class Handler {
 		}
 	}
 
-	public void addObject(GameObject object) {
-		this.object.add(object);
+	public static void addObject(GameObject object) {
+		Handler.object.add(object);
 	}
 
-	public void removeObject(GameObject object) {
-		this.object.remove(object);
+	public static  void removeObject(GameObject object) {
+		Handler.object.remove(object);
 	}
 
 

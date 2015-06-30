@@ -21,7 +21,7 @@ public class Player extends GameObject {
 	private float gravity = 1.3f;
 	private final float MAX_SPEED = 10;
 	public static Boolean dead = false;
-	
+	public static int levelid = 0;
 	private Handler handler;
 	
 	public static final TextureRegion tex = new TextureRegion(new Texture("Texture_Spritesheet.png"),32*4,0,48,96);
@@ -106,11 +106,8 @@ public class Player extends GameObject {
 			//resets the player position back to start if player touches lava
 			if (tempObject.getId() == ObjectId.Lava) {
 				if(getBounds().overlaps(tempObject.getBounds())){
-					//handler.removeObject(this);
-					x = xo;
-					y = yo;	
-					velX = 0;
-					velY = 0;
+					PlayScreen.levelId--;
+					PlayScreen.levelUp();
 				}
 			
 				
@@ -118,8 +115,7 @@ public class Player extends GameObject {
 			//ends the game if player touches the end block
 			if(tempObject.getId() == ObjectId.End){
 				if(getBounds().overlaps(tempObject.getBounds())){
-					System.exit(0);
-					
+					PlayScreen.levelUp();
 				}
 			}
 			//triggers the falling blocks to fall

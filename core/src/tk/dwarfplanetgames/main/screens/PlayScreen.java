@@ -28,6 +28,7 @@ public class PlayScreen implements Screen {
 	public static Handler h;
 	public static int playerX = 0;
 	public static int playerY = 0;
+	public static int levelId = 1;
 	TextureRegion block = new TextureRegion(new Texture("Texture_Spritesheet.png"), 32, 0, 32, 32);
 	
 	@Override
@@ -37,7 +38,9 @@ public class PlayScreen implements Screen {
 		camera.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		oldTime = System.nanoTime();
 		h = new Handler();
+		
 		Texture levelt = new Texture("Level-1.png");
+		
 		TextureData leveltd = levelt.getTextureData();
 		leveltd.prepare();
 		Pixmap level = leveltd.consumePixmap();
@@ -45,6 +48,15 @@ public class PlayScreen implements Screen {
 		camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f,0);
 		camera.update();
 		batch = new SpriteBatch();
+	}
+	
+	public static void levelUp() {
+		levelId++;
+		Texture levelt = new Texture("Level-" + levelId + ".png");
+		TextureData leveltd = levelt.getTextureData();
+		leveltd.prepare();
+		Pixmap level = leveltd.consumePixmap();
+		loadImageLevel(level);
 	}
 
 	@Override
@@ -85,7 +97,8 @@ public class PlayScreen implements Screen {
 		return time;
 	}
 	
-	private void loadImageLevel(Pixmap image){
+	private static void loadImageLevel(Pixmap image){
+		Handler.object.clear();
 		Handler handler = h;
 		int w = image.getWidth();
 		int h = image.getHeight();
