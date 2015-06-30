@@ -19,17 +19,14 @@ public class Player extends GameObject {
 	private float width = 48, height = 96;
 
 	private float gravity = 1.3f;
-	private final float MAX_SPEED = 10;
 	public static Boolean dead = false;
 	public static int levelid = 0;
-	private Handler handler;
 	
 	public static final TextureRegion tex = new TextureRegion(new Texture("Texture_Spritesheet.png"),32*4,0,48,96);
 	
 
-	public Player(float x, float y, Handler handler) {
+	public Player(float x, float y) {
 		super(x, y, ObjectId.Player);
-		this.handler = handler;
 		tex.flip(false,true);
 	}
 
@@ -63,8 +60,8 @@ public class Player extends GameObject {
 	}
 
 	private void Collision(LinkedList<GameObject> object) {
-		for (int i = 0; i < handler.object.size(); i++) {
-			GameObject tempObject = handler.object.get(i);
+		for (int i = 0; i < Handler.object.size(); i++) {
+			GameObject tempObject = Handler.object.get(i);
 
 			if (tempObject.getId() == ObjectId.Block ) {
 				// Right collision

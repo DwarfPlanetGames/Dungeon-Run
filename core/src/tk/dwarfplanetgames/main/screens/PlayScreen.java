@@ -39,7 +39,7 @@ public class PlayScreen implements Screen {
 		oldTime = System.nanoTime();
 		h = new Handler();
 		
-		Texture levelt = new Texture("Level-1.png");
+		Texture levelt = new Texture("levels/1.png");
 		
 		TextureData leveltd = levelt.getTextureData();
 		leveltd.prepare();
@@ -75,6 +75,7 @@ public class PlayScreen implements Screen {
 				camera.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 				camera.position.set(playerX + camera.viewportWidth / 2f, playerY,0);
 				camera.update();
+				batch.setProjectionMatrix(camera.combined);
 			}
 		}
 		float dist = 1.25f;
@@ -84,13 +85,13 @@ public class PlayScreen implements Screen {
 					batch.draw(block, (int)(x * 64 - Gdx.graphics.getWidth() / 2f + camera.position.x - (camera.position.x / dist) % 64), (int)(y * 64 - Gdx.graphics.getHeight() / 2f + camera.position.y - (camera.position.y / dist) % 64), 64,64);
 				}
 			}
-			h.render(batch);
+			Handler.render(batch);
 		}
 		batch.end();
 	}
 	
 	public void update() {
-		h.tick();
+		Handler.tick();
 	}
 	
 	public static int getTime() {
@@ -99,7 +100,6 @@ public class PlayScreen implements Screen {
 	
 	private static void loadImageLevel(Pixmap image){
 		Handler.object.clear();
-		Handler handler = h;
 		int w = image.getWidth();
 		int h = image.getHeight();
 		
@@ -109,20 +109,20 @@ public class PlayScreen implements Screen {
 				int pixel = image.getPixel(xx, yy);
 				
 				if(pixel == 0xffffffff){
-					handler.addObject(new Block(xx*32, yy*32,0));
+					Handler.addObject(new Block(xx*32, yy*32,0));
 				}
 				if(pixel == 0x0000ffff){	
-					handler.addObject(new Player(xx*32, yy*32,handler));
+					Handler.addObject(new Player(xx*32, yy*32));
 					System.out.println("Add Player at :" + xx*32 + " x " + yy*32);
 				}
 				if(pixel == 0xff0000ff){
-					handler.addObject(new Lava(xx*32, yy*32,2));
+					Handler.addObject(new Lava(xx*32, yy*32,2));
 				}
 				if(pixel == 0x00ff00ff){
-					handler.addObject(new End(xx*32,yy*32));
+					Handler.addObject(new End(xx*32,yy*32));
 				}
 				if(pixel == 0x555353ff){
-					handler.addObject(new FallingBlocks((float)xx*32,(float)yy*32,3));
+					Handler.addObject(new FallingBlocks((float)xx*32,(float)yy*32,3));
 				}
 			}
 		}
