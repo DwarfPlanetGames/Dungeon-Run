@@ -18,7 +18,7 @@ public class Player extends GameObject {
 
 	private float width = 48, height = 96;
 
-	private float gravity = 0.98f;
+	private float gravity = 1.3f;
 	private final float MAX_SPEED = 10;
 	public static Boolean dead = false;
 	
@@ -43,7 +43,7 @@ public class Player extends GameObject {
 		
 		if (Gdx.input.isTouched() && !jumping) {
 			jumping=true;
-			velY -= 20;
+			velY -= 30;
 		}
 
 		if (falling || jumping) {

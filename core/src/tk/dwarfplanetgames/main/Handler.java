@@ -25,8 +25,8 @@ public class Handler {
 		for (int i = 0; i < object.size(); i++) {
 			tempObject = object.get(i);
 			if ((
-					tempObject.x > camX &&
-					tempObject.y > camY &&
+					tempObject.x + tempObject.width > camX &&
+					tempObject.y + tempObject.width > camY &&
 					tempObject.x < camX + camWidth && 
 					tempObject.y < camY + camHeight
 					)||
@@ -41,9 +41,9 @@ public class Handler {
 		for (int i = 0; i < object.size(); i++) {
 			tempObject = object.get(i);
 			if (
-					tempObject.x > camX &&
-					tempObject.y > camY &&
-					tempObject.x < camX + camWidth && 
+					tempObject.x + 32 > camX &&
+					tempObject.y + 32 > camY &&
+					tempObject.x  < camX + camWidth && 
 					tempObject.y < camY + camHeight
 					) {
 				tempObject.render(b);

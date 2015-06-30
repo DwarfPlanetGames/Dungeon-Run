@@ -70,7 +70,7 @@ public class TitleScreen extends InputAdapter implements Screen {
 			}
 		}
 		if (Gdx.graphics.getHeight() >= 720) {
-			batch.draw(titleTex, Gdx.graphics.getWidth() / 2f - titleTex.getRegionWidth() / 2f, Gdx.graphics.getHeight() / 2f + menu.getHeight() / 2f, titleTex.getRegionWidth() / 2f, titleTex.getRegionHeight() / 2f, titleTex.getRegionWidth(), titleTex.getRegionHeight(), (float) Math.sin(time / 120f) / 10f + 1.5f, 1.5f, (float) Math.cos(time / 140f) * 5f);
+			batch.draw(titleTex, Gdx.graphics.getWidth() / 2f - titleTex.getRegionWidth() / 2f, Gdx.graphics.getHeight() / 2f + menu.getHeight() / 2f, titleTex.getRegionWidth() / 2f, titleTex.getRegionHeight() / 2f, titleTex.getRegionWidth(), titleTex.getRegionHeight(), (float) Math.sin(time / 120f) / 10f + 1.5f, (float) Math.sin(time / 120f) / 10f + 1.5f, (float) Math.cos(time / 140f) * 5f);
 			batch.draw(menu, Gdx.graphics.getWidth() / 2f - menu.getWidth() / 2f, Gdx.graphics.getHeight() / 2f - menu.getHeight() / 2f - titleTex.getRegionHeight() / 2f);
 		} else {
 			batch.draw(titleTex, Gdx.graphics.getWidth() / 2f - titleTex.getRegionWidth() / 2f, Gdx.graphics.getHeight() / 2f + menu.getHeight() / 2f - titleTex.getRegionHeight() * 0.75f, titleTex.getRegionWidth() / 2f, titleTex.getRegionHeight() / 2f, titleTex.getRegionWidth(), titleTex.getRegionHeight(), (float) Math.sin(time / 120f) / 10f + 1.5f, 1.5f, (float) Math.cos(time / 140f) * 5f);
@@ -88,28 +88,12 @@ public class TitleScreen extends InputAdapter implements Screen {
 			}
 			if (screenX > Gdx.graphics.getWidth() / 2f - menu.getWidth() / 2f && screenX < Gdx.graphics.getWidth() / 2f - menu.getWidth() / 2f + menu.getWidth()) {
 				if (screenY > menuY + 100 * 3) {
-					music.stop();
+					//music.stop();
 					((Game) Gdx.app.getApplicationListener()).setScreen(new PlayScreen());
 					System.out.println("STARTED PlayScreen");
 				}
 			}
 		}
-	}
-
-	@Override
-	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		float menuY;
-		if (Gdx.graphics.getHeight() >= 720) {
-			menuY = Gdx.graphics.getHeight() / 2f - menu.getHeight() / 2f - titleTex.getRegionHeight() / 2f;
-		} else {
-			menuY = Gdx.graphics.getHeight() / 2f - menu.getHeight() / 2f - titleTex.getRegionHeight() / 2f;
-		}
-		if (screenX > Gdx.graphics.getWidth() / 2f - menu.getWidth() / 2f && screenX < Gdx.graphics.getWidth() / 2f - menu.getWidth() / 2f + menu.getWidth()) {
-			if (screenY > menuY + 100 * 3) {
-				((Game) Gdx.app.getApplicationListener()).setScreen(new PlayScreen());
-			}
-		}
-		return true;
 	}
 
 	@Override
@@ -141,7 +125,7 @@ public class TitleScreen extends InputAdapter implements Screen {
 		menu.dispose();
 		img.dispose();
 		
-		music.dispose();
+		//music.dispose();
 	}
 
 }

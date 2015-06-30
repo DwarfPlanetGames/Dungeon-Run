@@ -28,10 +28,11 @@ public class PlayScreen implements Screen {
 	public static Handler h;
 	public static int playerX = 0;
 	public static int playerY = 0;
-	TextureRegion block = new TextureRegion(new Texture("Texture_Spritesheet.png"), 0, 0, 32, 32);
+	TextureRegion block = new TextureRegion(new Texture("Texture_Spritesheet.png"), 32, 0, 32, 32);
 	
 	@Override
 	public void show() {
+		block.flip(false, true);
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		camera.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		oldTime = System.nanoTime();
@@ -64,10 +65,11 @@ public class PlayScreen implements Screen {
 				camera.update();
 			}
 		}
+		float dist = 1.25f;
 		if (time > 60*secToBegin) {
-			for (int x = 0; x < Gdx.graphics.getWidth() / 64f; x++) {
-				for (int y = 0; y < Gdx.graphics.getHeight() / 64f; y++) {
-					batch.draw(block, x - Gdx.graphics.getWidth() / 2f + camera.position.x + camera.position.x % 64, y - Gdx.graphics.getHeight() / 2f + camera.position.y + camera.position.y % 64, 64,64);
+			for (int x = -1; x < Gdx.graphics.getWidth() / 64f + 2; x++) {
+				for (int y = -1; y < Gdx.graphics.getHeight() / 64f + 2; y++) {
+					batch.draw(block, (int)(x * 64 - Gdx.graphics.getWidth() / 2f + camera.position.x - (camera.position.x / dist) % 64), (int)(y * 64 - Gdx.graphics.getHeight() / 2f + camera.position.y - (camera.position.y / dist) % 64), 64,64);
 				}
 			}
 			h.render(batch);
