@@ -1,7 +1,5 @@
 package tk.dwarfplanetgames.main.screens;
 
-import tk.dwarfplanetgames.main.Handler;
-
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
@@ -21,6 +19,7 @@ public class TitleScreen extends InputAdapter implements Screen {
 	TextureRegion titleTex = new TextureRegion(new Texture("title.png"), 0, 0, 526, 121);
 	TextureRegion block = new TextureRegion(new Texture("Texture_Spritesheet.png"), 0, 0, 32, 32);
 	Texture menu = new Texture("TitleButtons.png");
+	Texture vignette = new Texture("Vignette.png");
 	public static OrthographicCamera camera;
 	public Music music;
 	public static int playerX = 0;
@@ -73,6 +72,7 @@ public class TitleScreen extends InputAdapter implements Screen {
 			camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 			camera.position.set(playerX + camera.viewportWidth / 2f, camera.viewportHeight / 2f,0);
 			camera.update();
+			batch.draw(vignette,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 			renderMenu();
 		}
 		batch.end();
