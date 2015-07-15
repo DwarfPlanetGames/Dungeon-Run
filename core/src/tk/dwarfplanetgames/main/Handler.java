@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import tk.dwarfplanetgames.main.screens.PlayScreen;
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Handler {
@@ -38,6 +39,10 @@ public class Handler {
 	}
 
 	public static void render(SpriteBatch b) {
+		camX = PlayScreen.camera.position.x - PlayScreen.camera.viewportWidth / 2f;
+		camY = PlayScreen.camera.position.y - PlayScreen.camera.viewportHeight / 2f;
+		camWidth = PlayScreen.camera.viewportWidth;
+		camHeight = PlayScreen.camera.viewportHeight;
 		for (int i = 0; i < object.size(); i++) {
 			tempObject = object.get(i);
 			if (
@@ -48,6 +53,24 @@ public class Handler {
 					) {
 				tempObject.render(b);
 			}
+		}
+	}
+	
+	public static void qRender(SpriteBatch b, OrthographicCamera camera) {
+		camX = camera.position.x - camera.viewportWidth / 2f;
+		camY = camera.position.y - camera.viewportHeight / 2f;
+		camWidth = camera.viewportWidth;
+		camHeight = camera.viewportHeight;
+		for (int i = 0; i < object.size(); i++) {
+			tempObject = object.get(i);
+			float x = tempObject.x;
+			float y = tempObject.y;
+			tempObject.x -= camX;
+			tempObject.y -= camY;
+			tempObject.y = ((tempObject.y - camY) * -1) + camY;
+			tempObject.render(b);
+			tempObject.x = x;
+			tempObject.y = y;
 		}
 	}
 

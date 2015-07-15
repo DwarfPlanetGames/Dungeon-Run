@@ -1,5 +1,7 @@
 package tk.dwarfplanetgames.main.screens;
 
+import tk.dwarfplanetgames.main.Handler;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
@@ -21,6 +23,8 @@ public class TitleScreen extends InputAdapter implements Screen {
 	Texture menu = new Texture("TitleButtons.png");
 	public static OrthographicCamera camera;
 	public Music music;
+	public static int playerX = 0;
+	public PlayScreen playScreen;
 
 	@Override
 	public void show() {
@@ -34,6 +38,12 @@ public class TitleScreen extends InputAdapter implements Screen {
 		music = Gdx.audio.newMusic(Gdx.files.internal("music/0.mp3"));
 		music.setLooping(true);
 		music.play();
+		PlayScreen.levelId = 0;
+		PlayScreen.levelUp();
+		playScreen = new PlayScreen();
+		playScreen.show(); 
+		playScreen.update();
+		playScreen.playerY += Gdx.graphics.getHeight() / 8f;
 	}
 
 	@Override
@@ -53,22 +63,32 @@ public class TitleScreen extends InputAdapter implements Screen {
 			time++;
 			if (time > 60 * secToBegin) {
 				update();
+				camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f,0);
+				camera.update();
 			}
 		}
-		if (time > 60 * secToBegin) renderMenu();
+		if (time > 60 * secToBegin) {
+			playScreen.render(batch,camera);
+			//batch.setProjectionMatrix(camera.combined);
+			camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+			camera.position.set(playerX + camera.viewportWidth / 2f, camera.viewportHeight / 2f,0);
+			camera.update();
+			renderMenu();
+		}
 		batch.end();
 	}
 
 	public void update() {
-
+		PlayScreen.playerX += 1;
 	}
 
 	public void renderMenu() {
-		for (int x = -1; x < Gdx.graphics.getWidth() / 64 + 2; x++) {
-			for (int y = -1; y < Gdx.graphics.getHeight() / 64 + 2; y++) {
-				batch.draw(block, x * 64, y * 64, 64, 64);
+		/*for (int x = -1; x < Gdx.graphics.getWidth() / 64f + 2; x++) {
+			for (int y = -1; y < Gdx.graphics.getHeight() / 64f + 2; y++) {
+				batch.draw(block, (int)(x * 64 - Gdx.graphics.getWidth() / 2f + camera.position.x - (camera.position.x / 2f) % 64), (int)(y * 64 - Gdx.graphics.getHeight() / 2f + camera.position.y - (camera.position.y / 2f) % 64), 64,64);
 			}
-		}
+		}*/
+		//Handler.render(batch);
 		if (Gdx.graphics.getHeight() >= 720) {
 			batch.draw(titleTex, Gdx.graphics.getWidth() / 2f - titleTex.getRegionWidth() / 2f, Gdx.graphics.getHeight() / 2f + menu.getHeight() / 2f, titleTex.getRegionWidth() / 2f, titleTex.getRegionHeight() / 2f, titleTex.getRegionWidth(), titleTex.getRegionHeight(), (float) Math.sin(time / 120f) / 10f + 1.5f, (float) Math.sin(time / 120f) / 10f + 1.5f, (float) Math.cos(time / 140f) * 5f);
 			batch.draw(menu, Gdx.graphics.getWidth() / 2f - menu.getWidth() / 2f, Gdx.graphics.getHeight() / 2f - menu.getHeight() / 2f - titleTex.getRegionHeight() / 2f);

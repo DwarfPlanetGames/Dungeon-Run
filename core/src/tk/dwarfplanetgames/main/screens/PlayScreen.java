@@ -24,6 +24,7 @@ public class PlayScreen implements Screen {
 	//TextureRegion img;
 	long oldTime;
 	long newTime;
+	public boolean update = true;
 	public static int time = 0;
 	public static Handler h;
 	public static int playerX = 0;
@@ -48,6 +49,7 @@ public class PlayScreen implements Screen {
 		camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f,0);
 		camera.update();
 		batch = new SpriteBatch();
+		update = true;
 	}
 	
 	public static void levelUp() {
@@ -57,6 +59,22 @@ public class PlayScreen implements Screen {
 		leveltd.prepare();
 		Pixmap level = leveltd.consumePixmap();
 		loadImageLevel(level);
+	}
+	
+	public void render(SpriteBatch batch, OrthographicCamera camera) {
+		camera.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		//camera.update();
+		camera.position.set(playerX, playerY,0);
+		camera.update();
+		//batch.setProjectionMatrix(camera.combined);
+		float dist = 2f;
+		for (int x = -1; x < Gdx.graphics.getWidth() / 64f + 2; x++) {
+			for (int y = -1; y < Gdx.graphics.getHeight() / 64f + 2; y++) {
+				batch.draw(block, (int)(x * 64 /*- Gdx.graphics.getWidth() / 2f*/ - (camera.position.x / dist) % 64), (int)(y * 64 /*- Gdx.graphics.getHeight() / 2f*/ - (camera.position.y / dist) % 64), 64,64);
+			}
+		}
+		Handler.qRender(batch,camera);
+		
 	}
 
 	@Override
@@ -71,7 +89,8 @@ public class PlayScreen implements Screen {
 			oldTime = newTime;
 			time++;
 			if (time > 60*secToBegin) {
-				update();
+				if (update)
+					update();
 				camera.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 				camera.position.set(playerX + camera.viewportWidth / 2f, playerY,0);
 				camera.update();
@@ -113,6 +132,8 @@ public class PlayScreen implements Screen {
 				}
 				if(pixel == 0x0000ffff){	
 					Handler.addObject(new Player(xx*32, yy*32));
+					playerX = xx*32;
+					playerY = yy*32;
 					System.out.println("Add Player at :" + xx*32 + " x " + yy*32);
 				}
 				if(pixel == 0xff0000ff){
