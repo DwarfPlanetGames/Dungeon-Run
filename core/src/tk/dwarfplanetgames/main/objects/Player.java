@@ -22,11 +22,12 @@ public class Player extends GameObject {
 	public static Boolean dead = false;
 	public static int levelid = 0;
 	
-	public static final TextureRegion tex = new TextureRegion(new Texture("Texture_Spritesheet.png"),32*4,0,48,96);
+	public static TextureRegion tex;
 	
 
 	public Player(float x, float y) {
 		super(x, y, ObjectId.Player);
+		tex = new TextureRegion(new Texture("Texture_Spritesheet.png"),32*4,0,48,96);
 		tex.flip(false,true);
 	}
 
