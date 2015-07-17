@@ -31,6 +31,7 @@ public class PlayScreen implements Screen {
 	public static int playerY = 0;
 	public static int levelId = 1;
 	TextureRegion block = new TextureRegion(new Texture("Texture_Spritesheet.png"), 32, 0, 32, 32);
+	TextureRegion vignette = new TextureRegion(new Texture("Vignette.png"));
 	
 	@Override
 	public void show() {
@@ -105,6 +106,7 @@ public class PlayScreen implements Screen {
 			}
 			Handler.render(batch);
 		}
+		batch.draw(vignette, camera.position.x - camera.viewportWidth/2f, camera.position.y - camera.viewportHeight/2f, vignette.getRegionWidth()/2f, vignette.getRegionHeight()/2f, camera.viewportWidth, camera.viewportHeight, 1, 1, 0);
 		batch.end();
 	}
 	
