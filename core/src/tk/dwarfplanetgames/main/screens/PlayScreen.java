@@ -74,7 +74,6 @@ public class PlayScreen implements Screen {
 			}
 		}
 		Handler.qRender(batch,camera);
-		
 	}
 
 	@Override

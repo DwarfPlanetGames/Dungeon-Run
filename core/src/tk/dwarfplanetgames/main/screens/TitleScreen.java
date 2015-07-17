@@ -1,5 +1,7 @@
 package tk.dwarfplanetgames.main.screens;
 
+import tk.dwarfplanetgames.main.objects.Player;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
@@ -43,6 +45,7 @@ public class TitleScreen extends InputAdapter implements Screen {
 		playScreen.show(); 
 		playScreen.update();
 		playScreen.playerY += Gdx.graphics.getHeight() / 8f;
+		Player.tex.flip(false, true);
 	}
 
 	@Override
@@ -111,6 +114,12 @@ public class TitleScreen extends InputAdapter implements Screen {
 					//music.stop();
 					((Game) Gdx.app.getApplicationListener()).setScreen(new PlayScreen());
 					System.out.println("STARTED PlayScreen");
+				} else if (screenY > menuY + 100 * 2) {
+					//Help
+				} else if (screenY > menuY + 100 * 1) {
+					((Game) Gdx.app.getApplicationListener()).setScreen(new OptionsScreen());
+				} else if (screenY > menuY + 100 * 0) {
+					((Game) Gdx.app.getApplicationListener()).setScreen(new CreditsScreen());
 				}
 			}
 		}
