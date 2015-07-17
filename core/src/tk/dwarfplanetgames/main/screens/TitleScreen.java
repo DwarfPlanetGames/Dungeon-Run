@@ -38,6 +38,7 @@ public class TitleScreen extends InputAdapter implements Screen {
 
 		music = Gdx.audio.newMusic(Gdx.files.internal("music/0.mp3"));
 		music.setLooping(true);
+		music.setVolume(0.6f);
 		music.play();
 		PlayScreen.levelId = 0;
 		PlayScreen.levelUp();
