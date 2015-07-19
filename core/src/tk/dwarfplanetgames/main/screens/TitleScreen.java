@@ -9,6 +9,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -29,6 +30,7 @@ public class TitleScreen extends InputAdapter implements Screen {
 
 	@Override
 	public void show() {
+		PlayScreen.overlay = new Pixmap(32,32,Pixmap.Format.RGBA8888);
 		//((Game) Gdx.app.getApplicationListener()).setScreen(new PlayScreen());
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -45,7 +47,7 @@ public class TitleScreen extends InputAdapter implements Screen {
 		playScreen = new PlayScreen();
 		playScreen.show(); 
 		playScreen.update();
-		playScreen.playerY += Gdx.graphics.getHeight() / 8f;
+		PlayScreen.playerY += Gdx.graphics.getHeight() / 8f;
 		Player.tex.flip(false, true);
 	}
 

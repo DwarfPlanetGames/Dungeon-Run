@@ -5,8 +5,8 @@ import java.util.LinkedList;
 
 import tk.dwarfplanetgames.main.GameObject;
 import tk.dwarfplanetgames.main.ObjectId;
+import tk.dwarfplanetgames.main.screens.PlayScreen;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
@@ -15,7 +15,7 @@ public class Block extends GameObject{
 	
 	int falling = 0;
 	
-	public static final TextureRegion tex = new TextureRegion(new Texture("Texture_Spritesheet.png"),0,0,32,32);
+	public static final TextureRegion tex = new TextureRegion(PlayScreen.tex,0,0,32,32);
 	
 	private int type;
 	public Block(float x, float y,int type) {

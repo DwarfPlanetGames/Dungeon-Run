@@ -1,5 +1,7 @@
 package tk.dwarfplanetgames.main.screens;
 
+import java.util.Random;
+
 import tk.dwarfplanetgames.main.Handler;
 import tk.dwarfplanetgames.main.objects.Block;
 import tk.dwarfplanetgames.main.objects.End;
@@ -20,6 +22,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class PlayScreen implements Screen {
 	
 	SpriteBatch batch;
+	public static Random rand = new Random();
+	public static Pixmap overlay;
 	public static OrthographicCamera camera;
 	//TextureRegion img;
 	long oldTime;
@@ -30,8 +34,12 @@ public class PlayScreen implements Screen {
 	public static int playerX = 0;
 	public static int playerY = 0;
 	public static int levelId = 1;
-	TextureRegion block = new TextureRegion(new Texture("Texture_Spritesheet.png"), 32, 0, 32, 32);
-	TextureRegion vignette = new TextureRegion(new Texture("Vignette.png"));
+	public static float X = 0;
+	public static float Y = 0;
+	public static Texture tex = new Texture("Texture_Spritesheet.png");
+	public static TextureRegion gradient = new TextureRegion(new Texture("Gradient.png"),0,0,1,1);
+	TextureRegion block = new TextureRegion(tex, 32, 0, 32, 32);
+	TextureRegion vignette = new TextureRegion(new Texture("game_vignette.png"));
 	
 	@Override
 	public void show() {
@@ -106,7 +114,7 @@ public class PlayScreen implements Screen {
 			}
 			Handler.render(batch);
 		}
-		batch.draw(vignette, camera.position.x - camera.viewportWidth/2f, camera.position.y - camera.viewportHeight/2f, vignette.getRegionWidth()/2f, vignette.getRegionHeight()/2f, camera.viewportWidth, camera.viewportHeight, 1, 1, 0);
+		//batch.draw(vignette, camera.position.x - camera.viewportWidth/2f, camera.position.y - camera.viewportHeight/2f, vignette.getRegionWidth()/2f, vignette.getRegionHeight()/2f, camera.viewportWidth, camera.viewportHeight, 1, 1, 0);
 		batch.end();
 	}
 	

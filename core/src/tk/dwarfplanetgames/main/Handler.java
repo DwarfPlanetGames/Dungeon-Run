@@ -51,7 +51,7 @@ public class Handler {
 					tempObject.x  < camX + camWidth && 
 					tempObject.y < camY + camHeight
 					) {
-				tempObject.render(b);
+				tempObject.qRender(b);
 			}
 		}
 	}

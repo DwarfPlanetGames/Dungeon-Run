@@ -58,6 +58,8 @@ public class Player extends GameObject {
 		Collision(object);
 		PlayScreen.playerX = (int) x - 128;
 		PlayScreen.playerY = (int) (y + height / 2f);
+		PlayScreen.X = x;
+		PlayScreen.Y = y;
 	}
 
 	private void Collision(LinkedList<GameObject> object) {
