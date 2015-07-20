@@ -11,7 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 
-public class Lava extends GameObject{
+public class Lava extends GameObject {
 
 	public static final TextureRegion tex = new TextureRegion(new Texture("Texture_Spritesheet.png"),32*2,0,32,32);
 	private int type;
@@ -38,8 +38,12 @@ public class Lava extends GameObject{
 
 	@Override
 	public void render(SpriteBatch b) {
-		if(type == 2)
-			b.draw(tex,x,y);
+		b.draw(tex,x,y);
+	}
+	
+	@Override
+	public void qRender(SpriteBatch b) {
+		b.draw(tex,x,y);
 	}
 
 }

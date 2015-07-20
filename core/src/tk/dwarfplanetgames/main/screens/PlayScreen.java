@@ -9,6 +9,7 @@ import tk.dwarfplanetgames.main.objects.FallingBlocks;
 import tk.dwarfplanetgames.main.objects.Lava;
 import tk.dwarfplanetgames.main.objects.Player;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -33,7 +34,8 @@ public class PlayScreen implements Screen {
 	public static Handler h;
 	public static int playerX = 0;
 	public static int playerY = 0;
-	public static int levelId = 1;
+	public static int levelId = 1
+			-1;
 	public static float X = 0;
 	public static float Y = 0;
 	public static Texture tex = new Texture("Texture_Spritesheet.png");
@@ -49,25 +51,27 @@ public class PlayScreen implements Screen {
 		oldTime = System.nanoTime();
 		h = new Handler();
 		
-		Texture levelt = new Texture("levels/1.png");
+		levelUp();
 		
-		TextureData leveltd = levelt.getTextureData();
-		leveltd.prepare();
-		Pixmap level = leveltd.consumePixmap();
-		loadImageLevel(level);
 		camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f,0);
 		camera.update();
 		batch = new SpriteBatch();
 		update = true;
+		TitleScreen.music.stop();
 	}
 	
 	public static void levelUp() {
 		levelId++;
-		Texture levelt = new Texture("levels/" + levelId + ".png");
-		TextureData leveltd = levelt.getTextureData();
-		leveltd.prepare();
-		Pixmap level = leveltd.consumePixmap();
-		loadImageLevel(level);
+		LevelScreen.file.writeString(String.valueOf(levelId), false);
+		try {
+			Texture levelt = new Texture("levels/" + levelId + ".png");
+			TextureData leveltd = levelt.getTextureData();
+			leveltd.prepare();
+			Pixmap level = leveltd.consumePixmap();
+			loadImageLevel(level);
+		} catch (Exception e) {
+			((Game) Gdx.app.getApplicationListener()).setScreen(new TitleScreen());
+		}
 	}
 	
 	public void render(SpriteBatch batch, OrthographicCamera camera) {
@@ -112,6 +116,8 @@ public class PlayScreen implements Screen {
 					batch.draw(block, (int)(x * 64 - Gdx.graphics.getWidth() / 2f + camera.position.x - (camera.position.x / dist) % 64), (int)(y * 64 - Gdx.graphics.getHeight() / 2f + camera.position.y - (camera.position.y / dist) % 64), 64,64);
 				}
 			}
+			gradient.setRegion(150, 0, 1, 1);
+			batch.draw(gradient, camera.position.x, camera.position.y, 0.5f, 0.5f, 1, 1, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 0);
 			Handler.render(batch);
 		}
 		//batch.draw(vignette, camera.position.x - camera.viewportWidth/2f, camera.position.y - camera.viewportHeight/2f, vignette.getRegionWidth()/2f, vignette.getRegionHeight()/2f, camera.viewportWidth, camera.viewportHeight, 1, 1, 0);

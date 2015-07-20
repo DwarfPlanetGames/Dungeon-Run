@@ -24,7 +24,7 @@ public class TitleScreen extends InputAdapter implements Screen {
 	Texture menu = new Texture("TitleButtons.png");
 	Texture vignette = new Texture("Vignette.png");
 	public static OrthographicCamera camera;
-	public Music music;
+	public static Music music;
 	public static int playerX = 0;
 	public PlayScreen playScreen;
 
@@ -41,7 +41,6 @@ public class TitleScreen extends InputAdapter implements Screen {
 		music = Gdx.audio.newMusic(Gdx.files.internal("music/0.mp3"));
 		music.setLooping(true);
 		music.setVolume(0.6f);
-		music.play();
 		PlayScreen.levelId = 0;
 		PlayScreen.levelUp();
 		playScreen = new PlayScreen();
@@ -49,6 +48,7 @@ public class TitleScreen extends InputAdapter implements Screen {
 		playScreen.update();
 		PlayScreen.playerY += Gdx.graphics.getHeight() / 8f;
 		Player.tex.flip(false, true);
+		music.play();
 	}
 
 	@Override
@@ -115,8 +115,8 @@ public class TitleScreen extends InputAdapter implements Screen {
 			if (screenX > Gdx.graphics.getWidth() / 2f - menu.getWidth() / 2f && screenX < Gdx.graphics.getWidth() / 2f - menu.getWidth() / 2f + menu.getWidth()) {
 				if (screenY > menuY + 100 * 3) {
 					//music.stop();
-					((Game) Gdx.app.getApplicationListener()).setScreen(new PlayScreen());
-					System.out.println("STARTED PlayScreen");
+					//((Game) Gdx.app.getApplicationListener()).setScreen(new PlayScreen());
+					((Game) Gdx.app.getApplicationListener()).setScreen(new LevelScreen());
 				} else if (screenY > menuY + 100 * 2) {
 					//Help
 				} else if (screenY > menuY + 100 * 1) {
