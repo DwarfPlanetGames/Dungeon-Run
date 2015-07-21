@@ -11,7 +11,8 @@ import com.badlogic.gdx.graphics.g3d.utils.FirstPersonCameraController;
 
 public class LevelScreen implements Screen {
 	
-	public Texture tex = new Texture("levels.png");
+	public final Texture tex = new Texture("levels.png");
+	private final Texture vignette = new Texture("Vignette.png");
 	public static FileHandle file;
 	public float x = 0f;
 	public SpriteBatch batch;
@@ -50,6 +51,8 @@ public class LevelScreen implements Screen {
 			PlayScreen.gradient.setRegion(100,0,1,1);
 			batch.draw(PlayScreen.gradient, (int)((Gdx.input.getX() - texX) / 100f) * 100 + texX, texY, 0, 0, 1, 1, 100, tex.getHeight(), 0);
 		}
+		
+		batch.draw(vignette,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 		
 		batch.end();
 		
