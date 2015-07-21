@@ -1,13 +1,18 @@
 package tk.dwarfplanetgames.main.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class HelpScreen implements Screen {
 	
 	private SpriteBatch batch;
 	private BitmapFont font;
+	TextureRegion block = new TextureRegion(new Texture("Texture_Spritesheet.png"), 0, 0, 32, 32);
 	private static final String[] helps = new String[]{
 		"How to play Dungeon Run",
 		"",
@@ -27,10 +32,19 @@ public class HelpScreen implements Screen {
 	public void show() {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
+		font.getData().setScale(16f);
 	}
 
 	@Override
 	public void render(float delta) {
+		Gdx.gl.glClearColor(0f, 0f, 0f, 0);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		
+		for (int x = -1; x < Gdx.graphics.getWidth() / 64f + 2; x++) {
+			for (int y = -1; y < Gdx.graphics.getHeight() / 64f + 2; y++) {
+				batch.draw(block, (int)(x * 64), (int)(y * 64), 64,64);
+			}
+		}
 		
 	}
 

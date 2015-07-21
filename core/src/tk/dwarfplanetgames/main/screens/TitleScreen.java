@@ -119,7 +119,7 @@ public class TitleScreen extends InputAdapter implements Screen {
 					//((Game) Gdx.app.getApplicationListener()).setScreen(new PlayScreen());
 					((Game) Gdx.app.getApplicationListener()).setScreen(new LevelScreen());
 				} else if (screenY > menuY + 100 * 2) {
-					//Help
+					((Game) Gdx.app.getApplicationListener()).setScreen(new HelpScreen());
 				} else if (screenY > menuY + 100 * 1) {
 					((Game) Gdx.app.getApplicationListener()).setScreen(new OptionsScreen());
 				} else if (screenY > menuY + 100 * 0) {
