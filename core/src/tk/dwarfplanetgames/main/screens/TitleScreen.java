@@ -19,7 +19,7 @@ public class TitleScreen extends InputAdapter implements Screen {
 	long oldTime, newTime;
 	public static int time = 0;
 	Texture img = new Texture("DPGamesLogo1.png");
-	TextureRegion titleTex = new TextureRegion(new Texture("title.png"), 0, 0, 526, 121);
+	TextureRegion titleTex = new TextureRegion(new Texture("title-beta.png"), 0, 0, 526, 121);
 	TextureRegion block = new TextureRegion(new Texture("Texture_Spritesheet.png"), 0, 0, 32, 32);
 	Texture menu = new Texture("TitleButtons.png");
 	Texture vignette = new Texture("Vignette.png");
@@ -42,6 +42,7 @@ public class TitleScreen extends InputAdapter implements Screen {
 		music.setLooping(true);
 		music.setVolume(0.6f);
 		PlayScreen.levelId = 0;
+		PlayScreen.update = false;
 		PlayScreen.levelUp();
 		playScreen = new PlayScreen();
 		playScreen.show(); 

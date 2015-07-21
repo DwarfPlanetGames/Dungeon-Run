@@ -29,7 +29,7 @@ public class PlayScreen implements Screen {
 	//TextureRegion img;
 	long oldTime;
 	long newTime;
-	public boolean update = true;
+	public static boolean update = true;
 	public static int time = 0;
 	public static Handler h;
 	public static int playerX = 0;
@@ -62,7 +62,8 @@ public class PlayScreen implements Screen {
 	
 	public static void levelUp() {
 		levelId++;
-		LevelScreen.file.writeString(String.valueOf(levelId), false);
+		if (update)
+			LevelScreen.file.writeString(String.valueOf(levelId), false);
 		try {
 			Texture levelt = new Texture("levels/" + levelId + ".png");
 			TextureData leveltd = levelt.getTextureData();
