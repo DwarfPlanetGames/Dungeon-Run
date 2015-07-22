@@ -1,8 +1,14 @@
 package tk.dwarfplanetgames.main.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class OptionsScreen implements Screen {
+	
+	TextureRegion block = new TextureRegion(new Texture("Texture_Spritesheet.png"), 32, 0, 32, 32);
 	
 	@Override
 	public void show() {
@@ -12,7 +18,8 @@ public class OptionsScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
-		// TODO Auto-generated method stub
+		Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 0);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 	}
 

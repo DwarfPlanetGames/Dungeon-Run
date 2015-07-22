@@ -22,23 +22,20 @@ public class TitleScreen extends InputAdapter implements Screen {
 	TextureRegion titleTex = new TextureRegion(new Texture("title-beta.png"), 0, 0, 526, 121);
 	TextureRegion block = new TextureRegion(new Texture("Texture_Spritesheet.png"), 0, 0, 32, 32);
 	Texture menu = new Texture("TitleButtons.png");
-	Texture vignette = new Texture("Vignette.png");
+	public static final Texture vignette = new Texture("Vignette.png");
 	public static OrthographicCamera camera;
-	public static Music music;
+	public static Music music = Gdx.audio.newMusic(Gdx.files.internal("music/0.mp3"));
 	public static int playerX = 0;
 	public PlayScreen playScreen;
 
 	@Override
 	public void show() {
-		PlayScreen.overlay = new Pixmap(32,32,Pixmap.Format.RGBA8888);
 		//((Game) Gdx.app.getApplicationListener()).setScreen(new PlayScreen());
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
 		oldTime = System.nanoTime();
 		batch = new SpriteBatch();
-
-		music = Gdx.audio.newMusic(Gdx.files.internal("music/0.mp3"));
 		music.setLooping(true);
 		music.setVolume(0.6f);
 		PlayScreen.levelId = 0;
@@ -49,7 +46,8 @@ public class TitleScreen extends InputAdapter implements Screen {
 		playScreen.update();
 		PlayScreen.playerY += Gdx.graphics.getHeight() / 8f;
 		Player.tex.flip(false, true);
-		music.play();
+		if (!music.isPlaying())
+			music.play();
 	}
 
 	@Override

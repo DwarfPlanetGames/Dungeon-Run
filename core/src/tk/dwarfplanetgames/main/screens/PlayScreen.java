@@ -41,7 +41,7 @@ public class PlayScreen implements Screen {
 	public static Texture tex = new Texture("Texture_Spritesheet.png");
 	public static TextureRegion gradient = new TextureRegion(new Texture("Gradient.png"),0,0,1,1);
 	TextureRegion block = new TextureRegion(tex, 32, 0, 32, 32);
-	TextureRegion vignette = new TextureRegion(new Texture("game_vignette.png"));
+	public static final TextureRegion vignette = new TextureRegion(new Texture("game_vignette.png"));
 	
 	@Override
 	public void show() {
