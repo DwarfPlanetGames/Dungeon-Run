@@ -52,6 +52,10 @@ public class TitleScreen extends InputAdapter implements Screen {
 	public static void setup() {
 		music.setLooping(true);
 		music.setVolume(musicVol);
+		//music.play();
+	}
+	
+	public static void playMusic() {
 		music.play();
 	}
 
