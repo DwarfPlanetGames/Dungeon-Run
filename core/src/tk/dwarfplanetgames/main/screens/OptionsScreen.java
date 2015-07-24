@@ -47,10 +47,10 @@ public class OptionsScreen implements Screen {
 		//volume = new Slider(0, 100, 1.0f, false, skin, "Volume");
 		//volume.setValue(OptionsScreen.volumed);
 		
-		mute = new CheckBox(Gdx.graphics.getWidth() / 2 - 32, (int)(Gdx.graphics.getHeight() * 0.666f) - 32,"Mute");
+		mute = new CheckBox(Gdx.graphics.getWidth() / 2 - Gdx.graphics.getWidth() / 4, (int)(Gdx.graphics.getHeight() * 0.666f) - 32,"Mute");
 		mute.checked = OptionsScreen.muted;
 		
-		fancyGraphics = new CheckBox(Gdx.graphics.getWidth() / 2 - 32,(int)(Gdx.graphics.getHeight()* 0.333f) - 32,"Pretty Stuff");
+		fancyGraphics = new CheckBox(Gdx.graphics.getWidth() / 2 - Gdx.graphics.getWidth() / 4,(int)(Gdx.graphics.getHeight()* 0.333f) - 32,"Pretty Stuff");
 		fancyGraphics.checked = OptionsScreen.fancyGraphicsd;
 		
 		stage.addActor(back);
