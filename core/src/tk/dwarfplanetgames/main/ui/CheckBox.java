@@ -18,7 +18,7 @@ public class CheckBox extends Actor {
 		super(x, y, 64, 64);
 		this.text = text;
 		font = new BitmapFont(Gdx.files.internal("default.fnt"));
-		font.getData().setSize(1f);
+		font.getData().setScale(1f);
 		font.setColor(0.8f,0.8f,0.8f,1);
 	}
 
