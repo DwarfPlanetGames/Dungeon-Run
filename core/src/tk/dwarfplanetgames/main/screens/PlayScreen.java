@@ -70,6 +70,9 @@ public class PlayScreen implements Screen {
 			leveltd.prepare();
 			Pixmap level = leveltd.consumePixmap();
 			loadImageLevel(level);
+			levelt.dispose();
+			leveltd.disposePixmap();
+			level.dispose();
 		} catch (Exception e) {
 			((Game) Gdx.app.getApplicationListener()).setScreen(new TitleScreen());
 		}

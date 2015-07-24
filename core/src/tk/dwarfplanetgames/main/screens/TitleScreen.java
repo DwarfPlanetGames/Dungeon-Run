@@ -36,8 +36,6 @@ public class TitleScreen extends InputAdapter implements Screen {
 
 		oldTime = System.nanoTime();
 		batch = new SpriteBatch();
-		music.setLooping(true);
-		music.setVolume(0.6f);
 		PlayScreen.levelId = 0;
 		PlayScreen.update = false;
 		PlayScreen.levelUp();
@@ -46,8 +44,11 @@ public class TitleScreen extends InputAdapter implements Screen {
 		playScreen.update();
 		PlayScreen.playerY += Gdx.graphics.getHeight() / 8f;
 		Player.tex.flip(false, true);
-		if (!music.isPlaying())
+		if (!music.isPlaying()) {
+			music.setLooping(true);
+			music.setVolume(0.6f);
 			music.play();
+		}
 	}
 
 	@Override
