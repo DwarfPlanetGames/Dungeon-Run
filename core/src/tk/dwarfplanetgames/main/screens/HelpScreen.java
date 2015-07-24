@@ -34,7 +34,7 @@ public class HelpScreen implements Screen {
 	public void show() {
 		batch = new SpriteBatch();
 		font = new BitmapFont(Gdx.files.internal("default.fnt"));
-		font.getData().setScale(((float)Gdx.graphics.getHeight() / 720f) * 2.5f);
+		font.getData().setScale(((float)Gdx.graphics.getHeight() / 720f) * 1.1f);
 		font.setColor(Color.WHITE);
 	}
 
@@ -54,11 +54,11 @@ public class HelpScreen implements Screen {
 		
 		font.setColor(Color.BLACK);
 		for (int i = 0; i < helps.length; i++) {
-			font.draw(batch, helps[i], 65, Gdx.graphics.getHeight() - (i * 12*4 + 13));
+			font.draw(batch, helps[i], 65, Gdx.graphics.getHeight() - (i * 12*4 + 33));
 		}
 		font.setColor(Color.WHITE);
 		for (int i = 0; i < helps.length; i++) {
-			font.draw(batch, helps[i], 64, Gdx.graphics.getHeight() - (i * 12*4 + 12));
+			font.draw(batch, helps[i], 64, Gdx.graphics.getHeight() - (i * 12*4 + 32));
 		}
 		batch.end();
 		
