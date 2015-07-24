@@ -2,6 +2,7 @@ package tk.dwarfplanetgames.main;
 
 import java.util.LinkedList;
 
+import tk.dwarfplanetgames.main.screens.OptionsScreen;
 import tk.dwarfplanetgames.main.screens.PlayScreen;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -38,12 +39,19 @@ public abstract class GameObject {
 	}
 	
 	public void qRender(SpriteBatch b) {
+		
 		int dist = getDistToPlayer();
 		int num = 2;
-		if (dist/num < 255)
+		if (dist/num < 255) {
 			render(b);
-		PlayScreen.gradient.setRegion(dist/num <= 255 ? dist/num : 255,0,1,1);
-		b.draw(PlayScreen.gradient, (int)x, (int)y, 0, 0, 1, 1, 32, 32, 0);
+		} else {
+			PlayScreen.gradient.setRegion(dist/num <= 255 ? dist/num : 255,0,1,1);
+			b.draw(PlayScreen.gradient, (int)x, (int)y, 0, 0, 1, 1, 32, 32, 0);
+		}
+		if (OptionsScreen.fancyGraphicsd) {
+			PlayScreen.gradient.setRegion(dist/num <= 255 ? dist/num : 255,0,1,1);
+			b.draw(PlayScreen.gradient, (int)x, (int)y, 0, 0, 1, 1, 32, 32, 0);
+		}
 	}
 	
 	public ObjectId getId() {

@@ -8,6 +8,7 @@ public class MainGame extends Game {
 	
 	@Override
 	public void create () {
+		TitleScreen.setup();
 		setScreen(new TitleScreen());
 	}
 

@@ -24,6 +24,7 @@ public class TitleScreen extends InputAdapter implements Screen {
 	public static final Texture vignette = new Texture("Vignette.png");
 	public static OrthographicCamera camera;
 	public static Music music = Gdx.audio.newMusic(Gdx.files.internal("music/0.mp3"));
+	public static final float musicVol = 0.6f;
 	public static int playerX = 0;
 	public PlayScreen playScreen;
 
@@ -43,11 +44,15 @@ public class TitleScreen extends InputAdapter implements Screen {
 		playScreen.update();
 		PlayScreen.playerY += Gdx.graphics.getHeight() / 8f;
 		Player.tex.flip(false, true);
-		if (!music.isPlaying()) {
-			music.setLooping(true);
-			music.setVolume(0.6f);
+		if (!music.isPlaying() && !OptionsScreen.muted) {
 			music.play();
 		}
+	}
+	
+	public static void setup() {
+		music.setLooping(true);
+		music.setVolume(musicVol);
+		music.play();
 	}
 
 	@Override

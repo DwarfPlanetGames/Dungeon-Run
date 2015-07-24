@@ -47,10 +47,10 @@ public class OptionsScreen implements Screen {
 		//volume = new Slider(0, 100, 1.0f, false, skin, "Volume");
 		//volume.setValue(OptionsScreen.volumed);
 		
-		mute = new CheckBox(32,64);
+		mute = new CheckBox(Gdx.graphics.getWidth() / 2 - 32, (int)(Gdx.graphics.getHeight() * 0.666f) - 32,"Mute");
 		mute.checked = OptionsScreen.muted;
 		
-		fancyGraphics = new CheckBox(32,128);
+		fancyGraphics = new CheckBox(Gdx.graphics.getWidth() / 2 - 32,(int)(Gdx.graphics.getHeight()* 0.333f) - 32,"Pretty Stuff");
 		fancyGraphics.checked = OptionsScreen.fancyGraphicsd;
 		
 		stage.addActor(back);
@@ -70,12 +70,20 @@ public class OptionsScreen implements Screen {
 		muted = mute.checked;
 		fancyGraphicsd = fancyGraphics.checked;
 		
+		if (muted) {
+			TitleScreen.music.setVolume(0.0f);
+		} else {
+			TitleScreen.music.setVolume(TitleScreen.musicVol);
+		}
+		
 		batch.begin();
 		for (int x = -1; x < Gdx.graphics.getWidth() / 64f + 2; x++) {
 			for (int y = -1; y < Gdx.graphics.getHeight() / 64f + 2; y++) {
 				batch.draw(block, (int) (x * 64), (int) (y * 64), 64, 64);
 			}
 		}
+		PlayScreen.gradient.setRegion(200, 0, 1, 1);
+		batch.draw(PlayScreen.gradient, 0, 0, 0, 0, 1, 1, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 0);
 		stage.draw(batch);
 		batch.end();
 	}

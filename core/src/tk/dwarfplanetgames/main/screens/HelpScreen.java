@@ -33,8 +33,8 @@ public class HelpScreen implements Screen {
 	@Override
 	public void show() {
 		batch = new SpriteBatch();
-		font = new BitmapFont();
-		font.getData().setScale(((float)Gdx.graphics.getHeight() / 720f) * 2.5f);
+		font = new BitmapFont(Gdx.files.internal("default.fnt"));
+		font.getData().setScale(1f/*((float)Gdx.graphics.getHeight() / 720f) * 2.5f*/);
 		font.setColor(Color.WHITE);
 	}
 
