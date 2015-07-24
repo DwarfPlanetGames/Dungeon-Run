@@ -1,8 +1,10 @@
 package tk.dwarfplanetgames.main.screens;
 
+import tk.dwarfplanetgames.main.ui.Actor;
 import tk.dwarfplanetgames.main.ui.CheckBox;
 import tk.dwarfplanetgames.main.ui.Stage;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -22,11 +24,25 @@ public class OptionsScreen implements Screen {
 	public CheckBox mute;
 	public static boolean fancyGraphicsd = true;
 	public CheckBox fancyGraphics;
+	
+	public Actor back;
 
 	@Override
 	public void show() {
 		batch = new SpriteBatch();
 		stage = new Stage(new Texture(Gdx.files.internal("skin.png")));
+		
+		back = new Actor(0, Gdx.graphics.getHeight() - 64, 64,64){
+			Texture tex = new Texture("back.png");
+			@Override
+			public void touchDown(int localX, int localY) {
+				((Game) Gdx.app.getApplicationListener()).setScreen(new TitleScreen());
+			}
+			@Override
+			public void draw(SpriteBatch batch, Texture skin) {
+				batch.draw(tex,x,y);
+			}
+		};
 		
 		//volume = new Slider(0, 100, 1.0f, false, skin, "Volume");
 		//volume.setValue(OptionsScreen.volumed);
@@ -37,6 +53,7 @@ public class OptionsScreen implements Screen {
 		fancyGraphics = new CheckBox(32,128);
 		fancyGraphics.checked = OptionsScreen.fancyGraphicsd;
 		
+		stage.addActor(back);
 		//stage.addActor(volume);
 		stage.addActor(mute);
 		stage.addActor(fancyGraphics);
@@ -47,13 +64,18 @@ public class OptionsScreen implements Screen {
 		Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 0);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
+		stage.act(delta);
+		
+		//volumed = (int)volume.getValue();
+		muted = mute.checked;
+		fancyGraphicsd = fancyGraphics.checked;
+		
 		batch.begin();
 		for (int x = -1; x < Gdx.graphics.getWidth() / 64f + 2; x++) {
 			for (int y = -1; y < Gdx.graphics.getHeight() / 64f + 2; y++) {
 				batch.draw(block, (int) (x * 64), (int) (y * 64), 64, 64);
 			}
 		}
-		stage.act(delta);
 		stage.draw(batch);
 		batch.end();
 	}
@@ -80,9 +102,7 @@ public class OptionsScreen implements Screen {
 
 	@Override
 	public void dispose() {
-		//volumed = (int)volume.getValue();
-		muted = mute.checked;
-		fancyGraphicsd = fancyGraphics.checked;
+		
 	}
 
 }

@@ -14,11 +14,9 @@ import com.badlogic.gdx.math.Rectangle;
 public class Lava extends GameObject {
 
 	public static final TextureRegion tex = new TextureRegion(new Texture("Texture_Spritesheet.png"),32*2,0,32,32);
-	private int type;
 		
 	public Lava(float x, float y,int type) {
 		super(x, y, ObjectId.Lava);
-		this.type = type;
 	}
 
 	public void tick(LinkedList<GameObject> object) {

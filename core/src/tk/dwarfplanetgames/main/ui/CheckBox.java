@@ -11,13 +11,13 @@ public class CheckBox extends Actor {
 	public boolean checked = false;
 
 	public CheckBox(int x, int y) {
-		super(x, y, 32, 32);
+		super(x - 8, y - 8, 32 + 16, 32 + 16);
 	}
 
 	@Override
 	public void draw(SpriteBatch batch, Texture skin) {
 		TextureRegion r = new TextureRegion(skin, checked ? 32 * 3 : 32 * 2, 0, 32, 32);
-		batch.draw(r, x, y);
+		batch.draw(r, x + 8, y + 8);
 	}
 
 	@Override

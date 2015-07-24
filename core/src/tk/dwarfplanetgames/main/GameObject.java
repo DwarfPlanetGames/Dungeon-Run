@@ -4,7 +4,6 @@ import java.util.LinkedList;
 
 import tk.dwarfplanetgames.main.screens.PlayScreen;
 
-import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
