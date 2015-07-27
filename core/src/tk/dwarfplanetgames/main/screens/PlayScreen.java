@@ -34,8 +34,7 @@ public class PlayScreen implements Screen {
 	public static Handler h;
 	public static int playerX = 0;
 	public static int playerY = 0;
-	public static int levelId = 1
-			-1;
+	public static int levelId = 1 - 1;
 	public static float X = 0;
 	public static float Y = 0;
 	public static Texture tex = new Texture("Texture_Spritesheet.png");
@@ -95,7 +94,7 @@ public class PlayScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
-		int secToBegin = 2;
+		int secToBegin = 0;
 		batch.setProjectionMatrix(camera.combined);
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
