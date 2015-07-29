@@ -15,7 +15,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 
 public class Player extends GameObject {
-//this is a test
+
 	private float width = 48, height = 96;
 
 	private float gravity = 1.3f;
