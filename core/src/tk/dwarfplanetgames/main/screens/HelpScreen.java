@@ -10,10 +10,15 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import tk.dwarfplanetgames.main.ui.Actor;
+import tk.dwarfplanetgames.main.ui.Stage;
+
 public class HelpScreen implements Screen {
 	
 	private SpriteBatch batch;
 	private BitmapFont font;
+	public Actor back;
+	public Stage stage;
 	TextureRegion block = new TextureRegion(new Texture("Texture_Spritesheet.png"), 32, 0, 32, 32);
 	private static final String[] helps = new String[]{
 		"How to play Dungeon Run",
@@ -33,16 +38,31 @@ public class HelpScreen implements Screen {
 	@Override
 	public void show() {
 		batch = new SpriteBatch();
+		stage = new Stage(new Texture(Gdx.files.internal("skin.png")));
 		font = new BitmapFont(Gdx.files.internal("default.fnt"));
 		font.getData().setScale(((float)Gdx.graphics.getHeight() / 720f) * 1.1f);
 		font.setColor(Color.WHITE);
+		
+		back = new Actor(0, Gdx.graphics.getHeight() - 64,64,64){
+			Texture tex = new Texture("back.png");
+			@Override
+			public void touchDown(int LocalX, int LocalY){
+				((Game) Gdx.app.getApplicationListener()).setScreen(new TitleScreen());
+			}
+			@Override
+			public void draw(SpriteBatch batch,Texture skin){
+				batch.draw(tex, x,y);
+			}
+		};
+		
+		stage.addActor(back);
 	}
 
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0f, 0f, 0f, 0);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
+		stage.act(delta);
 		batch.begin();
 		for (int x = -1; x < Gdx.graphics.getWidth() / 64f + 2; x++) {
 			for (int y = -1; y < Gdx.graphics.getHeight() / 64f + 2; y++) {
@@ -60,11 +80,9 @@ public class HelpScreen implements Screen {
 		for (int i = 0; i < helps.length; i++) {
 			font.draw(batch, helps[i], 64, Gdx.graphics.getHeight() - (i * 12*4 + 32));
 		}
+		stage.draw(batch);
 		batch.end();
 		
-		if (Gdx.input.isTouched()) {
-			((Game) Gdx.app.getApplicationListener()).setScreen(new TitleScreen());
-		}
 	}
 
 	@Override

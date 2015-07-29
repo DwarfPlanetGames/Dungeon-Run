@@ -70,7 +70,7 @@ public class CreditsScreen implements Screen {
 	@Override
 	public void show() {
 		  batch = new SpriteBatch();  
-		 stage = new Stage(new Texture(Gdx.files.internal("skin.png")));
+		  stage = new Stage(new Texture(Gdx.files.internal("skin.png")));
 	        font = new BitmapFont(Gdx.files.internal("default.fnt"));
 	        font.setColor(Color.WHITE);
 	        font.getData().setScale(((float)Gdx.graphics.getHeight() / 720f) * 1.1f);

@@ -66,10 +66,13 @@ public class TitleScreen extends InputAdapter implements Screen {
 		if (time < 60 * secToBegin) Gdx.gl.glClearColor(1, 1, 1, 1);
 		else Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 0);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		
 		batch.begin();
+		
 		if (time < 60 * secToBegin) {
 			batch.draw(img, Gdx.graphics.getWidth() / 2f - img.getWidth() / 2, Gdx.graphics.getWidth() / 2f - img.getHeight());
 		}
+		
 		newTime = System.nanoTime();
 		if (newTime - oldTime > 1000000000 / 120.0) {
 			oldTime = newTime;
@@ -80,16 +83,24 @@ public class TitleScreen extends InputAdapter implements Screen {
 				camera.update();
 			}
 		}
+	
 		if (time > 60 * secToBegin) {
-			playScreen.render(batch,camera);
+			//playScreen.render(batch,camera);
 			//batch.setProjectionMatrix(camera.combined);
 			camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 			camera.position.set(playerX + camera.viewportWidth / 2f, camera.viewportHeight / 2f,0);
 			camera.update();
+			for (int x = -1; x < Gdx.graphics.getWidth() / 64f + 2; x++) {
+				for (int y = -1; y < Gdx.graphics.getHeight() / 64f + 2; y++) {
+					batch.draw(block, (int)(x * 64 - (time * 0.90f)%64), (int)(y * 64), 64,64);
+				}
+			}
 			batch.draw(vignette,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 			renderMenu();
 		}
+		
 		batch.end();
+		
 	}
 
 	public void update() {
@@ -103,6 +114,7 @@ public class TitleScreen extends InputAdapter implements Screen {
 			}
 		}*/
 		//Handler.render(batch);
+		
 		if (Gdx.graphics.getHeight() >= 720) {
 			batch.draw(titleTex, Gdx.graphics.getWidth() / 2f - titleTex.getRegionWidth() / 2f, Gdx.graphics.getHeight() / 2f + menu.getHeight() / 2f, titleTex.getRegionWidth() / 2f, titleTex.getRegionHeight() / 2f, titleTex.getRegionWidth(), titleTex.getRegionHeight(), (float) Math.sin(time / 120f) / 10f + 1.5f, (float) Math.sin(time / 120f) / 10f + 1.5f, (float) Math.cos(time / 140f) * 5f);
 			batch.draw(menu, Gdx.graphics.getWidth() / 2f - menu.getWidth() / 2f, Gdx.graphics.getHeight() / 2f - menu.getHeight() / 2f - titleTex.getRegionHeight() / 2f);
