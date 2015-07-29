@@ -15,7 +15,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 
 public class Player extends GameObject {
-
+//this is a test
 	private float width = 48, height = 96;
 
 	private float gravity = 1.3f;
@@ -30,7 +30,7 @@ public class Player extends GameObject {
 		tex = new TextureRegion(new Texture("Texture_Spritesheet.png"),32*4,0,48,96);
 		tex.flip(false,true);
 	}
-
+	
 	public void tick(LinkedList<GameObject> object) {
 		if (velX < 16f)
 			velX += 0.25f;
