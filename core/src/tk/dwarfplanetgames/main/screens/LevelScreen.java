@@ -13,6 +13,7 @@ public class LevelScreen implements Screen {
 	
 	public final Texture tex = new Texture("levels.png");
 	private final Texture vignette = new Texture("Vignette.png");
+	public static final Texture gradient = new Texture("Gradient.png");
 	public static FileHandle file;
 	public float x = 0f;
 	public SpriteBatch batch;
@@ -21,7 +22,7 @@ public class LevelScreen implements Screen {
 	public boolean isTouching = false;
 	public int X, Y;
 	public float texX = 0, texY = 0;
-	public int maxLev = 1;
+	private int maxLev = 1;
 	
 	public void show() {
 		x = 0f;
@@ -32,6 +33,11 @@ public class LevelScreen implements Screen {
 		} else {
 			maxLev = Integer.parseInt(file.readString());
 		}
+	}
+	
+	public void setMaxLev(int i) {
+		maxLev = i;
+		file.writeString(String.valueOf(i), false);
 	}
 	
 	public void render(float delta) {
@@ -50,6 +56,17 @@ public class LevelScreen implements Screen {
 		if (isTouching && !dragging) {
 			PlayScreen.gradient.setRegion(100,0,1,1);
 			batch.draw(PlayScreen.gradient, (int)((Gdx.input.getX() - texX) / 100f) * 100 + texX, texY, 0, 0, 1, 1, 100, tex.getHeight(), 0);
+		}
+		
+		for (int i = 0; i < 30; i++) {
+			if (i <= maxLev) {
+				
+			} else if (i == maxLev+1) {
+				batch.draw(gradient,i*100+texX,0,100,Gdx.graphics.getHeight());
+			} else {
+				PlayScreen.gradient.setRegion(255,0,1,1);
+				batch.draw(PlayScreen.gradient, i *100 + texX, texY, 0, 0, 1, 1, 100, tex.getHeight(), 0);
+			}
 		}
 		
 		batch.draw(vignette,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
@@ -81,8 +98,11 @@ public class LevelScreen implements Screen {
 	
 	public void touchUp(int x, int y) {
 		if (!dragging) {
-			PlayScreen.levelId = 0;
-			((Game) Gdx.app.getApplicationListener()).setScreen(new PlayScreen());
+			int i =  (int)((x-this.x)/100.0);
+			if (i <= maxLev) {
+				PlayScreen.levelId = i;
+				((Game) Gdx.app.getApplicationListener()).setScreen(new PlayScreen());
+			}
 		}
 		dragging = false;
 	}

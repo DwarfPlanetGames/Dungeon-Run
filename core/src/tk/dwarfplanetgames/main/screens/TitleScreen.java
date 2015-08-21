@@ -19,7 +19,7 @@ public class TitleScreen extends InputAdapter implements Screen {
 	public static int time = 0;
 	Texture img = new Texture("DPGamesLogo1.png");
 	TextureRegion titleTex = new TextureRegion(new Texture("title-beta.png"), 0, 0, 526, 121);
-	TextureRegion block = new TextureRegion(new Texture("Texture_Spritesheet.png"), 0, 0, 32, 32);
+	TextureRegion block = new TextureRegion(new Texture("Texture_Spritesheet.png"), 32, 0, 32, 32);
 	Texture menu = new Texture("TitleButtons.png");
 	public static final Texture vignette = new Texture("Vignette.png");
 	public static OrthographicCamera camera;
@@ -92,7 +92,7 @@ public class TitleScreen extends InputAdapter implements Screen {
 			camera.update();
 			for (int x = -1; x < Gdx.graphics.getWidth() / 64f + 2; x++) {
 				for (int y = -1; y < Gdx.graphics.getHeight() / 64f + 2; y++) {
-					batch.draw(block, (int)(x * 64 - (time * 0.90f)%64), (int)(y * 64), 64,64);
+					batch.draw(block, (int)(x * 64), (int)(y * 64 + (time * 0.90f)%64), 64,64);
 				}
 			}
 			batch.draw(vignette,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
