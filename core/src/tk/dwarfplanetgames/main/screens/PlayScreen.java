@@ -1,5 +1,6 @@
 package tk.dwarfplanetgames.main.screens;
 
+import java.util.LinkedList;
 import java.util.Random;
 
 import tk.dwarfplanetgames.main.Handler;
@@ -8,6 +9,7 @@ import tk.dwarfplanetgames.main.objects.End;
 import tk.dwarfplanetgames.main.objects.FallingBlocks;
 import tk.dwarfplanetgames.main.objects.Lava;
 import tk.dwarfplanetgames.main.objects.Player;
+import tk.dwarfplanetgames.main.powerups.Powerup;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -35,6 +37,7 @@ public class PlayScreen implements Screen {
 	public static int playerX = 0;
 	public static int playerY = 0;
 	public static int levelId = 1 - 1;
+	public static LinkedList<Powerup> powerups = new LinkedList<Powerup>();
 	public static float X = 0;
 	public static float Y = 0;
 	public static Texture tex = new Texture("Texture_Spritesheet.png");
@@ -91,9 +94,18 @@ public class PlayScreen implements Screen {
 		}
 		Handler.qRender(batch,camera);
 	}
+	
+	public void itemTap(int itemInt) {
+		if (itemInt > powerups.size())
+			return;
+		
+	}
 
 	@Override
 	public void render(float delta) {
+		if (Gdx.input.isTouched() && Gdx.input.getY() <= 64) {
+			itemTap((int)(Gdx.input.getX() / 64.0));
+		}
 		int secToBegin = 0;
 		batch.setProjectionMatrix(camera.combined);
 		Gdx.gl.glClearColor(0, 0, 0, 0);
