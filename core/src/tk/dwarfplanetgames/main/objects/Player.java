@@ -9,10 +9,13 @@ import tk.dwarfplanetgames.main.ObjectId;
 import tk.dwarfplanetgames.main.screens.PlayScreen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
+import com.sun.glass.events.KeyEvent;
+import com.sun.webkit.dom.KeyboardEventImpl;
 
 public class Player extends GameObject {
 
@@ -33,13 +36,13 @@ public class Player extends GameObject {
 
 	public void tick(LinkedList<GameObject> object) {
 		if (velX < 16f)
-			velX += 0.25f;
+			velX += 1f; //0.25f
 		else if (velX < 18f)
 			velX += 0.5f;
 		x += velX;
 		y += velY;
 
-		if (Gdx.input.isTouched() && !jumping && Gdx.input.getY() > 64) {
+		if ((Gdx.input.isTouched() || Gdx.input.isKeyPressed(Input.Keys.SPACE)) && !jumping && Gdx.input.getY() > 64) {
 			jumping = true;
 			velY -= 30;
 		}
