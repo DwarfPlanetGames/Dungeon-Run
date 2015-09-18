@@ -26,6 +26,10 @@ public class Player extends GameObject {
 	public static int levelid = 0;
 
 	public static TextureRegion tex;
+	public static final float DEFAULT_SPEED = 18f;
+	public float speed = DEFAULT_SPEED;
+	public static final float DEFAULT_ACCEL = 0.5f;
+	public float accel = DEFAULT_ACCEL;
 
 	public Player(float x, float y) {
 		super(x, y, ObjectId.Player);
@@ -35,10 +39,8 @@ public class Player extends GameObject {
 	}
 
 	public void tick(LinkedList<GameObject> object) {
-		if (velX < 16f)
-			velX += 1f; //0.25f
-		else if (velX < 18f)
-			velX += 0.5f;
+		 if (velX < speed)
+			velX += accel;
 		x += velX;
 		y += velY;
 
@@ -60,11 +62,13 @@ public class Player extends GameObject {
 		PlayScreen.playerY = (int) (y + height / 2f);
 		PlayScreen.X = x;
 		PlayScreen.Y = y;
+		speed = DEFAULT_SPEED;
+		accel = DEFAULT_ACCEL;
 	}
 
 	private void Collision(LinkedList<GameObject> object) {
-		for (int i = 0; i < Handler.object.size(); i++) {
-			GameObject tempObject = Handler.object.get(i);
+		for (int i = 0; i < Handler.objects.size(); i++) {
+			GameObject tempObject = Handler.objects.get(i);
 
 			if (tempObject.getId() == ObjectId.Block) {
 				// Right collision
@@ -169,6 +173,5 @@ public class Player extends GameObject {
 	@Override
 	public void render(SpriteBatch b) {
 		b.draw(tex, x, y);
-
 	}
 }

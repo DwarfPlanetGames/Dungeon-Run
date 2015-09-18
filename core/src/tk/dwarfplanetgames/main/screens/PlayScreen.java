@@ -148,7 +148,7 @@ public class PlayScreen implements Screen {
 	}
 	
 	private static void loadImageLevel(Pixmap image){
-		Handler.object.clear();
+		Handler.objects.clear();
 		int w = image.getWidth();
 		int h = image.getHeight();
 		
