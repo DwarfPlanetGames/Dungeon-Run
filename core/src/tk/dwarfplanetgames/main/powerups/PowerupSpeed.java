@@ -5,7 +5,8 @@ import tk.dwarfplanetgames.main.Handler;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class PowerupSpeed extends Powerup {
-
+	
+	// Constructor
 	public PowerupSpeed(int duration) {
 		super(duration);
 	}
