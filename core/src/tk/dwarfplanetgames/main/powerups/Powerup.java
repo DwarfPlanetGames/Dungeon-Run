@@ -1,6 +1,6 @@
 package tk.dwarfplanetgames.main.powerups;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public abstract class Powerup {
 	
@@ -19,7 +19,7 @@ public abstract class Powerup {
 		active = false;
 	}
 	
-	public abstract void renderItem(SpriteBatch batch);
+	public abstract TextureRegion renderItem();
 	
 	public void tick() {
 		
