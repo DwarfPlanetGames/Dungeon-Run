@@ -14,8 +14,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
-import com.sun.glass.events.KeyEvent;
-import com.sun.webkit.dom.KeyboardEventImpl;
 
 public class Player extends GameObject {
 
@@ -28,7 +26,7 @@ public class Player extends GameObject {
 	public static TextureRegion tex;
 	public static final float DEFAULT_SPEED = 18f;
 	public float speed = DEFAULT_SPEED;
-	public static final float DEFAULT_ACCEL = 0.5f;
+	public static final float DEFAULT_ACCEL = 0.25f;
 	public float accel = DEFAULT_ACCEL;
 
 	public Player(float x, float y) {
@@ -39,12 +37,15 @@ public class Player extends GameObject {
 	}
 
 	public void tick(LinkedList<GameObject> object) {
-		 if (velX < speed)
+		if (velX < speed)
 			velX += accel;
+		else
+			velX = speed;
 		x += velX;
 		y += velY;
 
-		if ((Gdx.input.isTouched() || Gdx.input.isKeyPressed(Input.Keys.SPACE)) && !jumping && Gdx.input.getY() > 64) {
+		if ((Gdx.input.isTouched() || Gdx.input.isKeyPressed(Input.Keys.SPACE))
+				&& !jumping && Gdx.input.getY() > 64) {
 			jumping = true;
 			velY -= 30;
 		}

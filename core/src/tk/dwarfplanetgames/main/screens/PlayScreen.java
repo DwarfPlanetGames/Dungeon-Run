@@ -59,7 +59,7 @@ public class PlayScreen implements Screen {
 		camera.update();
 		batch = new SpriteBatch();
 		update = true;
-		TitleScreen.music.stop();
+		//TitleScreen.music.stop();
 	}
 	
 	public static void levelUp() {

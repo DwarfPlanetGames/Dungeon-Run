@@ -20,12 +20,24 @@ public class CreditsScreen implements Screen {
 	public Stage stage;
 	public final Texture vignette = new Texture("Vignette.png");
 	TextureRegion block = new TextureRegion(new Texture(
-			"Texture_Spritesheet.png"), 0, 0, 32, 32);
+			"Texture_Spritesheet.png"), 32, 0, 32, 32);
 	private static final String creditNames[] = new String[] {
-			"Project Director and Lead Programmer:", "       Austin White", "",
-			"", "", "", "", "", "", "Programmers:", "       Brandon Dyer",
-			"       Ian Green" };
-	public static float creditanmin = 0;
+			"void main()",
+			"{","","",
+			"project_director = ",
+			"       Austin White",
+			"","", 
+			"lead_programmer = ",
+			"       Brandon Dyer",
+			"","",
+			"programmers[] = [",
+			"       Brandon Dyer",
+			"       Austin White",
+			"       Ian Green",
+			"]",
+			"","","}"
+			};
+	public static float creditanim = 0;
 
 	public void dispose() {
 		batch.dispose();
@@ -34,11 +46,12 @@ public class CreditsScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
-		creditanmin += delta * 75;
+		creditanim += delta * 75;
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		stage.act(delta);
 		batch.begin();
+		font.setColor(0,1,0,1);
 		// font.draw(batch, "Hello World", 200, 200);
 		for (int x = -1; x < Gdx.graphics.getWidth() / 64f + 2; x++) {
 			for (int y = -1; y < Gdx.graphics.getHeight() / 64f + 2; y++) {
@@ -47,7 +60,7 @@ public class CreditsScreen implements Screen {
 		}
 		for (int i = 0; i < creditNames.length; i++) {
 			font.draw(batch, creditNames[i], Gdx.graphics.getWidth() / 2 - 100,
-					Gdx.graphics.getHeight() / 2 - i * 75 + creditanmin);
+					Gdx.graphics.getHeight() / 2 - i * 32 + creditanim);
 		}
 		batch.draw(vignette, 0, 0, Gdx.graphics.getWidth(),
 				Gdx.graphics.getHeight());
@@ -69,6 +82,7 @@ public class CreditsScreen implements Screen {
 
 	@Override
 	public void show() {
+		creditanim = 0;
 		batch = new SpriteBatch();
 		stage = new Stage(new Texture(Gdx.files.internal("skin.png")));
 		font = new BitmapFont(Gdx.files.internal("default.fnt"));

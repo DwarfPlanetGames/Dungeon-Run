@@ -14,7 +14,7 @@ public class PowerupSpeed extends Powerup {
 	@Override
 	public void tick() {
 		super.tick();
-		Handler.getPlayer().accel = 1f;
+		Handler.getPlayer().accel = 1.25f;
 	}
 
 	@Override
