@@ -14,6 +14,7 @@ import tk.dwarfplanetgames.main.ui.Actor;
 import tk.dwarfplanetgames.main.ui.Stage;
 
 public class CreditsScreen implements Screen {
+	
 	private SpriteBatch batch;
 	private BitmapFont font;
 	public Actor back;

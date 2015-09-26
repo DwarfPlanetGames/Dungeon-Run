@@ -9,6 +9,7 @@ import tk.dwarfplanetgames.main.objects.End;
 import tk.dwarfplanetgames.main.objects.FallingBlocks;
 import tk.dwarfplanetgames.main.objects.Lava;
 import tk.dwarfplanetgames.main.objects.Player;
+import tk.dwarfplanetgames.main.objects.Spike;
 import tk.dwarfplanetgames.main.powerups.Powerup;
 
 import com.badlogic.gdx.Game;
@@ -168,6 +169,9 @@ public class PlayScreen implements Screen {
 				}
 				if(pixel == 0xff0000ff){
 					Handler.addObject(new Lava(xx*32, yy*32,2));
+				}
+				if(pixel == 0xffff00ff){
+					Handler.addObject(new Spike(xx*32, yy*32,2));
 				}
 				if(pixel == 0x00ff00ff){
 					Handler.addObject(new End(xx*32,yy*32));

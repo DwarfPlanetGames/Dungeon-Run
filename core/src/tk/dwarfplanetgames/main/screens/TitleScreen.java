@@ -1,6 +1,7 @@
 package tk.dwarfplanetgames.main.screens;
 
 import tk.dwarfplanetgames.main.objects.Player;
+import tk.dwarfplanetgames.main.objects.Spike;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -40,6 +41,8 @@ public class TitleScreen extends InputAdapter implements Screen {
 
 	@Override
 	public void show() {
+		// Flip textures
+		Spike.tex.flip(false, true);
 		// Initialize and setup the camera
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -83,6 +86,7 @@ public class TitleScreen extends InputAdapter implements Screen {
 
 	@Override
 	public void render(float delta) {
+		// Restart the game if the 'H' key is pressed
 		if (Gdx.input.isKeyJustPressed(Keys.H)) {
 			time = 0;
 			music.setPosition(0);

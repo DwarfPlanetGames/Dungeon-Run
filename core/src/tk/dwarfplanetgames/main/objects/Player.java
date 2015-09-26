@@ -19,14 +19,14 @@ public class Player extends GameObject {
 
 	private float width = 48, height = 96;
 
-	private float gravity = 1.3f;
+	private static float gravity = 2f;
 	public static Boolean dead = false;
 	public static int levelid = 0;
 
 	public static TextureRegion tex;
-	public static final float DEFAULT_SPEED = 18f;
+	public static final float DEFAULT_SPEED = 30f;//
 	public float speed = DEFAULT_SPEED;
-	public static final float DEFAULT_ACCEL = 0.25f;
+	public static final float DEFAULT_ACCEL = 0.6f;
 	public float accel = DEFAULT_ACCEL;
 
 	public Player(float x, float y) {
