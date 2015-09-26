@@ -32,7 +32,7 @@ public class HelpScreen implements Screen {
 		"Good luck",
 		"",
 		"If you throw your phone at a wall, it is not our fault.",
-		"Who was the one stupid enough to throw their phone anyway?",
+		"Who was the one stupid enough to play this game anyway?",
 	};
 	
 	@Override

@@ -12,35 +12,35 @@ import tk.dwarfplanetgames.main.GameObject;
 import tk.dwarfplanetgames.main.ObjectId;
 
 public class Spike extends GameObject {
-
-	public static TextureRegion tex = new TextureRegion(new Texture("Texture_Spritesheet.png"),0,32,32,32);
-		
-	public Spike(float x, float y,int type) {
+	
+	// TExture regiion for the render
+	public static TextureRegion tex = new TextureRegion(new Texture(
+			"Texture_Spritesheet.png"), 0, 32, 32, 32);
+	
+	// Constructor
+	public Spike(float x, float y, int type) {
+		// Use same player interactions as Lava
 		super(x, y, ObjectId.Lava);
 	}
-
+	
+	// Tick
 	public void tick(LinkedList<GameObject> object) {
-				
-	}
-	
-	public void render(Graphics g) {
-		/*if(type == 2)
-			g.drawImage(tex.block[2], (int)x,(int) y, null);*/
 	}
 
-	
 	public Rectangle getBounds() {
-
-		return new Rectangle((int)x, (int)y, 32,32);
+		// Return the bounding box
+		return new Rectangle((int) x, (int) y, 32, 32);
 	}
 
 	@Override
 	public void render(SpriteBatch b) {
-		b.draw(tex,x,y);
+		// Draw the texture
+		b.draw(tex, x, y);
 	}
-	
+
 	@Override
 	public void qRender(SpriteBatch b) {
-		b.draw(tex,x,y);
+		// Render the object
+		render(b);
 	}
 }
