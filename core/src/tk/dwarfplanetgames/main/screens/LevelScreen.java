@@ -31,7 +31,7 @@ public class LevelScreen implements Screen {
 		if (!file.exists()) {
 			file.writeString("1", false);
 		} else {
-			maxLev = Integer.parseInt(file.readString());
+			maxLev = Integer.parseInt(file.readString()) - 1;
 		}
 	}
 
@@ -40,7 +40,7 @@ public class LevelScreen implements Screen {
 			file.writeString("1", false);
 		} else {
 			file.writeString(String.valueOf(i), false);
-			maxLev = Integer.parseInt(file.readString());
+			maxLev = Integer.parseInt(file.readString()) - 1;
 		}
 	}
 
