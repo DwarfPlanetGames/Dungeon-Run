@@ -1,19 +1,18 @@
 package tk.dwarfplanetgames.main.objects;
 
-import java.awt.Graphics;
 import java.util.LinkedList;
+
+import tk.dwarfplanetgames.main.GameObject;
+import tk.dwarfplanetgames.main.ObjectId;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 
-import tk.dwarfplanetgames.main.GameObject;
-import tk.dwarfplanetgames.main.ObjectId;
-
 public class Spike extends GameObject {
 	
-	// TExture regiion for the render
+	// TExture region for the render
 	public static TextureRegion tex = new TextureRegion(new Texture(
 			"Texture_Spritesheet.png"), 0, 32, 32, 32);
 	

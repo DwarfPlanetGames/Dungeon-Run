@@ -49,7 +49,7 @@ public class PlayScreen implements Screen {
 	@Override
 	public void show() {
 		block.flip(false, true);
-		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		camera = new OrthographicCamera(1080, 720);
 		camera.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		oldTime = System.nanoTime();
 		h = new Handler();
