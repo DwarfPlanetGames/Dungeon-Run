@@ -36,8 +36,12 @@ public class LevelScreen implements Screen {
 	}
 	
 	public void setMaxLev(int i) {
-		maxLev = i;
-		file.writeString(String.valueOf(i), false);
+		if (!file.exists()) {
+			file.writeString("1", false);
+		} else {
+			file.writeString(String.valueOf(i), false);
+			maxLev = Integer.parseInt(file.readString());
+		}
 	}
 	
 	public void render(float delta) {

@@ -32,6 +32,7 @@ public class PlayScreen implements Screen {
 	//TextureRegion img;
 	long oldTime;
 	long newTime;
+	public static int camWidth = 1280, camHeight = 720;
 	public static boolean update = true;
 	public static int time = 0;
 	public static Handler h;
@@ -49,8 +50,8 @@ public class PlayScreen implements Screen {
 	@Override
 	public void show() {
 		block.flip(false, true);
-		camera = new OrthographicCamera(1080, 720);
-		camera.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		camera = new OrthographicCamera(camWidth, camHeight);
+		camera.setToOrtho(true, camWidth, camHeight);
 		oldTime = System.nanoTime();
 		h = new Handler();
 		
@@ -82,14 +83,14 @@ public class PlayScreen implements Screen {
 	}
 	
 	public void render(SpriteBatch batch, OrthographicCamera camera) {
-		camera.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		camera.setToOrtho(true, camWidth, camHeight);
 		//camera.update();
 		camera.position.set(playerX, playerY,0);
 		camera.update();
 		//batch.setProjectionMatrix(camera.combined);
 		float dist = 2f;
-		for (int x = -1; x < Gdx.graphics.getWidth() / 64f + 2; x++) {
-			for (int y = -1; y < Gdx.graphics.getHeight() / 64f + 2; y++) {
+		for (int x = -1; x < camWidth / 64f + 2; x++) {
+			for (int y = -1; y < camHeight / 64f + 2; y++) {
 				batch.draw(block, (int)(x * 64 /*- Gdx.graphics.getWidth() / 2f*/ - (camera.position.x / dist) % 64), (int)(y * 64 /*- Gdx.graphics.getHeight() / 2f*/ - (camera.position.y / dist) % 64), 64,64);
 			}
 		}
@@ -119,7 +120,7 @@ public class PlayScreen implements Screen {
 			if (time > 60*secToBegin) {
 				if (update)
 					update();
-				camera.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+				camera.setToOrtho(true, camWidth, camHeight);
 				camera.position.set(playerX + camera.viewportWidth / 2f, playerY,0);
 				camera.update();
 				batch.setProjectionMatrix(camera.combined);
@@ -127,13 +128,13 @@ public class PlayScreen implements Screen {
 		}
 		float dist = 1.25f;
 		if (time > 60*secToBegin) {
-			for (int x = -1; x < Gdx.graphics.getWidth() / 64f + 2; x++) {
-				for (int y = -1; y < Gdx.graphics.getHeight() / 64f + 2; y++) {
-					batch.draw(block, (int)(x * 64 - Gdx.graphics.getWidth() / 2f + camera.position.x - (camera.position.x / dist) % 64), (int)(y * 64 - Gdx.graphics.getHeight() / 2f + camera.position.y - (camera.position.y / dist) % 64), 64,64);
+			for (int x = -1; x < camWidth / 64f + 2; x++) {
+				for (int y = -1; y < camHeight / 64f + 2; y++) {
+					batch.draw(block, (int)(x * 64 - camWidth / 2f + camera.position.x - (camera.position.x / dist) % 64), (int)(y * 64 - camHeight / 2f + camera.position.y - (camera.position.y / dist) % 64), 64,64);
 				}
 			}
 			gradient.setRegion(150, 0, 1, 1);
-			batch.draw(gradient, camera.position.x, camera.position.y, 0.5f, 0.5f, 1, 1, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 0);
+			batch.draw(gradient, camera.position.x, camera.position.y, 0.5f, 0.5f, 1, 1, camWidth, camHeight, 0);
 			Handler.render(batch);
 		}
 		//batch.draw(vignette, camera.position.x - camera.viewportWidth/2f, camera.position.y - camera.viewportHeight/2f, vignette.getRegionWidth()/2f, vignette.getRegionHeight()/2f, camera.viewportWidth, camera.viewportHeight, 1, 1, 0);
