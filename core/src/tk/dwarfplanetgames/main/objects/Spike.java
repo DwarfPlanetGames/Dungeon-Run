@@ -13,8 +13,8 @@ import com.badlogic.gdx.math.Rectangle;
 public class Spike extends GameObject {
 	
 	// TExture region for the render
-	public static TextureRegion tex = new TextureRegion(new Texture(
-			"Texture_Spritesheet.png"), 0, 32, 32, 32);
+	public static Texture tex = new Texture(
+			"Texture_Spritesheet.png");
 	
 	// Constructor
 	public Spike(float x, float y, int type) {
@@ -34,7 +34,9 @@ public class Spike extends GameObject {
 	@Override
 	public void render(SpriteBatch b) {
 		// Draw the texture
-		b.draw(tex, x, y);
+		TextureRegion texr = new TextureRegion(tex, 0, 32, 32, 32);
+		texr.flip(false, true);
+		b.draw(texr, x, y);
 	}
 
 	@Override

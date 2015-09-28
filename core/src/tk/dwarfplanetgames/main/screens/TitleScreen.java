@@ -1,7 +1,6 @@
 package tk.dwarfplanetgames.main.screens;
 
 import tk.dwarfplanetgames.main.objects.Player;
-import tk.dwarfplanetgames.main.objects.Spike;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -53,8 +52,6 @@ public class TitleScreen extends InputAdapter implements Screen {
 		font.getData().setScale(
 				((float) Gdx.graphics.getHeight() / 720f) * 0.5f);
 		font.setColor(Color.WHITE);
-		// Flip textures
-		Spike.tex.flip(false, true);
 		// Initialize and setup the camera
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(),
 				Gdx.graphics.getHeight());

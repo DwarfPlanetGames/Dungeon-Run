@@ -52,7 +52,7 @@ public class CreditsScreen implements Screen {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		stage.act(delta);
 		batch.begin();
-		font.setColor(0,1,0,1);
+		font.setColor(1,1,1,1);
 		// font.draw(batch, "Hello World", 200, 200);
 		for (int x = -1; x < Gdx.graphics.getWidth() / 64f + 2; x++) {
 			for (int y = -1; y < Gdx.graphics.getHeight() / 64f + 2; y++) {
