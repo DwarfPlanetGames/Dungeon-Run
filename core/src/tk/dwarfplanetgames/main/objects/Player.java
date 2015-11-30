@@ -17,7 +17,7 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class Player extends GameObject {
 
-	private float width = 48, height = 96;
+	private float width = 108 / 2, height = 138 / 2;
 
 	private static float gravity = 2f;
 	public static Boolean dead = false;
@@ -28,12 +28,12 @@ public class Player extends GameObject {
 	public float speed = DEFAULT_SPEED;
 	public static final float DEFAULT_ACCEL = 0.6f;
 	public float accel = DEFAULT_ACCEL;
+	public static float anim = 0;
 
 	public Player(float x, float y) {
 		super(x, y, ObjectId.Player);
-		tex = new TextureRegion(new Texture("Texture_Spritesheet.png"), 32 * 4,
-				0, 48, 96);
-		tex.flip(false, true);
+		tex = new TextureRegion(new Texture("player_anim.png"), 0, 0, 108, 138);
+		//tex.flip(false, true);
 	}
 
 	public void tick(LinkedList<GameObject> object) {
@@ -43,6 +43,7 @@ public class Player extends GameObject {
 			velX = speed;
 		x += velX;
 		y += velY;
+		anim += velX / (30f * 2f);
 
 		if ((Gdx.input.isTouched() || Gdx.input.isKeyPressed(Input.Keys.SPACE))
 				&& !jumping && Gdx.input.getY() > 64) {
@@ -173,6 +174,13 @@ public class Player extends GameObject {
 
 	@Override
 	public void render(SpriteBatch b) {
-		b.draw(tex, x, y);
+		if (jumping || velY > 1 || velY < -1) 
+			tex.setRegion(((int) 2 % 8) * 108, 0, 108, 138);
+		else if (velX <= 1)
+			tex.setRegion(8 * 108, 0, 108, 138);
+		else
+			tex.setRegion(((int) anim % 8) * 108, 0, 108, 138);
+		tex.flip(false, true);
+		b.draw(tex, x, y, width, height);
 	}
 }

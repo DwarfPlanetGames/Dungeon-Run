@@ -36,6 +36,43 @@ public class CreditsScreen implements Screen {
 			"       Austin White",
 			"       Ian Green",
 			"]",
+			"","",
+			"artists[] = [",
+			"       Brandon Dyer",
+			"       Jerry Holmes",
+			"]",
+			"","",
+			"music_type = ",
+			"       Royalty Free",
+			"","",
+			"music_provided_by[] = [",
+			"       incompetech.com",
+			"]",
+			"","",
+			"libraries[] = [",
+			"       libGDX",
+			"]",
+			"","",
+			"languages[] = [",
+			"       Java SE",
+			"       PNG",
+			"]",
+			"","",
+			"released_for[] = [",
+			"       Android",
+			"       Windows",
+			"       Linux",
+			"       Macintosh",
+			"]",
+			"","",
+			"tools[] = [",
+			"       GitHub",
+			"       Eclipse",
+			"       Gradle",
+			"]",
+			"","",
+			"copyright = ",
+			"       © 2015 Austin White and Brandon Dyer",
 			"","","}"
 			};
 	public static float creditanim = 0;
@@ -60,6 +97,16 @@ public class CreditsScreen implements Screen {
 			}
 		}
 		for (int i = 0; i < creditNames.length; i++) {
+			font.setColor(Color.BLACK);
+			font.getData().setScale(
+					((float) Gdx.graphics.getHeight() / 720f) * 0.75f);
+			font.draw(batch, creditNames[i], Gdx.graphics.getWidth() / 2 - 0,
+					Gdx.graphics.getHeight() / 2 - i * 24 + creditanim * 0.75f);
+		}
+		for (int i = 0; i < creditNames.length; i++) {
+			font.setColor(Color.WHITE);
+			font.getData().setScale(
+					((float) Gdx.graphics.getHeight() / 720f) * 1.1f);
 			font.draw(batch, creditNames[i], Gdx.graphics.getWidth() / 2 - 100,
 					Gdx.graphics.getHeight() / 2 - i * 32 + creditanim);
 		}

@@ -169,7 +169,7 @@ public class TitleScreen extends InputAdapter implements Screen {
 		font.getData().setScale(
 				((float) Gdx.graphics.getHeight() / 720f) * 0.5f);
 		font.draw(batch,
-				"All rights reserved © 2015 Austin White and Brandon Dyer", 0,
+				"All rights reserved ©2015 Austin White and Brandon Dyer", 0,
 				((float) Gdx.graphics.getHeight() / 720f) * 16f);
 		// End batch
 		batch.end();
